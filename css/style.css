@@ -1,0 +1,90 @@
+/* Box Model Hack */
+* {
+   -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+           box-sizing: border-box;
+}
+
+/* Clear fix hack */
+.clearfix:after {
+   content: ".";
+   display: block;
+   clear: both;
+   visibility: hidden;
+   line-height: 0;
+   height: 0;
+}
+
+.clear {
+   clear: both;
+}
+
+/******************************************
+/* BASE STYLES
+/*******************************************/
+html {
+   font-size: 62.5%;
+}
+
+body {
+   color: white;
+   background: #646464;
+   font-family: 'Didact Gothic', sans-serif;
+}
+
+
+/******************************************
+/* LAYOUT
+/*******************************************/
+header {
+
+}
+
+footer {
+
+}
+
+section {
+   background: #333333;
+   margin-left: 10px;
+   margin-bottom: 7px;
+}
+
+h1 {
+   font-size: 2.775rem;
+}
+
+h3 {
+   font-size: 1.2rem;
+   padding-bottom: .8rem;
+}
+
+/******************************************
+/* ADDITIONAL STYLES
+/*******************************************/
+.btn {
+   color: white;
+   background: #444444;
+   text-decoration: none;
+   font-size: 1.125rem;
+   margin: 3px;
+}
+
+.btn-list {
+   padding: 3px;
+}
+
+.selected {
+   background: #e77c48;
+
+}
+
+input {
+   color: white;
+   background: #646464;
+   font-size: .9rem;
+}
+
+label {
+   font-size: .975rem;
+}

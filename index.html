@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="description" content="Your description goes here">
+		<meta name="keywords" content="one, two, three">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Blank Template</title>
+
+		<link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap" rel="stylesheet">
+
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body>
+		<section id="target">
+			<h3>Target Positions</h3>
+			<div class="btn-list">
+				<a class="btn selected" href="#">Location 1</a>
+				<a class="btn" href="#">Location 2</a>
+				<a class="btn" href="#">Location 3</a>
+				<a class="btn" href="#">Location 4</a>
+				<a class="btn" href="#">Location 5</a>
+				<a class="btn" href="#">Location 6</a>
+			</div>
+			<form>
+				<div class="row">
+					<label for="distance__target">Distance:</label>
+					<input type="number" id="distance__target">
+				</div>
+				<div class="row">
+					<label for="azimuth__target">Azimuth:</label>
+					<input type="number" id="azimuth__target">
+				</div>
+			</form>
+		</section>
+		<section id="friendly">
+			<h3>Friendly Positions</h3>
+			<div class="btn-list">
+				<a class="btn selected" href="#">Location 1</a>
+				<a class="btn" href="#">Location 2</a>
+				<a class="btn" href="#">Location 3</a>
+				<a class="btn" href="#">Location 4</a>
+				<a class="btn" href="#">Location 5</a>
+				<a class="btn" href="#">Location 6</a>
+			</div>
+			<form>
+				<div class="row">
+					<label for="distance__friendly">Distance:</label>
+					<input type="number" id="distance__friendly">
+				</div>
+				<div class="row">
+					<label for="azimuth__friendly">Azimuth:</label>
+					<input type="number" id="azimuth__friendly">
+				</div>
+			</form>
+		</section>
+		<section>
+			<h3>Result Vector</h3>
+			<span>Distance:</span>
+			<h1 id="distance__result">0.0</h1>
+			<span>Azimuth:</span>
+			<h1 id="azimuth__result">0.0</h1>
+		</section>
+		<section>
+			<h3>Old Spot</h3>
+			<form>
+				<div class="row">
+					<label for="distance__old">Distance:</label>
+					<input type="number" id="distance__old">
+				</div>
+				<div class="row">
+					<label for="azimuth__old">Azimuth:</label>
+					<input type="number" id="azimuth__old">
+				</div>
+			</form>
+			<a class="btn confirm" href="#">Relocate</a>
+		</section>
+		<section>
+			<a class="btn" href="#">10:00</a>
+			<a class="btn confirm" href="#">Reset All</a>
+		</section>
+		<script type="text/javascript" src="js/main.js"></script>
+	</body>
+</html>
