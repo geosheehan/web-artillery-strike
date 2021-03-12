@@ -76,7 +76,10 @@ h3 {
 
 .selected {
    background: #e77c48;
+}
 
+.hidden {
+   display: none;
 }
 
 input {
@@ -87,4 +90,10 @@ input {
 
 label {
    font-size: .975rem;
+}
+
+.btn input {
+   color: white;
+   background: #e77c48;
+   border-style: none;
 }
