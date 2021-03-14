@@ -1,6 +1,7 @@
 
+document.addEventListener('keydown',)
 let targets = document.querySelectorAll('#target .btn')
-let friends = document.querySelectorAll('#friendly .btn')
+let friends = document.querySelectorAll('#friend .btn')
 
 class Location {
    constructor() {
@@ -36,8 +37,6 @@ function initButtonList(btn_list) {
    btn_list.forEach(element => {
       element.addEventListener('click', selectLocation)
       element.addEventListener('dblclick', renameButton)
-
-      element.setAttribute('draggable', false)
    });
 }
 
@@ -54,7 +53,7 @@ function selectLocation(click) {
 }
 
 function renameButton(click) {
-   let input = click.target.querySelector('input')
+   click.target.innerHTML = `<input type="text" value=${click.target.value}>`
    input.classList.remove('hidden')
    input.focus()
 }

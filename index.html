@@ -15,17 +15,17 @@
 		<link rel="stylesheet" href="css/style.css">
 	</head>
 	<body>
-		<section id="target">
-			<h3>Target Positions</h3>
-			<div class="btn-list">
-				<a class="btn selected" href="#" draggable="false">Location 1</a>
-				<a class="btn" href="#" draggable="false">Location 2</a>
-				<a class="btn" href="#" draggable="false">Location 3</a>
-				<a class="btn" href="#" draggable="false">Location 4</a>
-				<a class="btn" href="#" draggable="false">Location 5</a>
-				<a class="btn" href="#" draggable="false">Location 6</a>
-			</div>
-			<form>
+		<div class="wrapper">
+			<fieldset id="target">
+				<legend>Target Position</legend>
+				<div class="btn-list">
+					<input type="button" value="Location 1" class="btn selected">
+					<input type="button" value="Location 2" class="btn">
+					<input type="button" value="Location 3" class="btn">
+					<input type="button" value="Location 4" class="btn">
+					<input type="button" value="Location 5" class="btn">
+					<input type="button" value="Location 6" class="btn">
+				</div>
 				<div class="row">
 					<label for="distance__target">Distance:</label>
 					<input type="number" id="distance__target">
@@ -34,57 +34,52 @@
 					<label for="azimuth__target">Azimuth:</label>
 					<input type="number" id="azimuth__target">
 				</div>
-			</form>
-		</section>
-		<section id="friendly">
-			<h3>Friendly Positions</h3>
-			<div class="btn-list">
-				<a class="btn selected" href="#" draggable="false">
-					<span>Location 1</span>
-					<input type="text" class="hidden">
-				</a>
-				<a class="btn" href="#" draggable="false">Location 2</a>
-				<a class="btn" href="#" draggable="false">Location 3</a>
-				<a class="btn" href="#" draggable="false">Location 4</a>
-				<a class="btn" href="#" draggable="false">Location 5</a>
-				<a class="btn" href="#" draggable="false">Location 6</a>
-			</div>
-			<form>
-				<div class="row">
-					<label for="distance__friendly">Distance:</label>
-					<input type="number" id="distance__friendly">
+			</fieldset>
+			<fieldset id="">
+				<legend>Friendly Positions</legend>
+				<div class="btn-list">
+					<input type="button" value="Location 1" class="btn selected">
+					<input type="button" value="Location 2" class="btn">
+					<input type="button" value="Location 3" class="btn">
+					<input type="button" value="Location 4" class="btn">
+					<input type="button" value="Location 5" class="btn">
+					<input type="button" value="Location 6" class="btn">
 				</div>
 				<div class="row">
-					<label for="azimuth__friendly">Azimuth:</label>
-					<input type="number" id="azimuth__friendly">
-				</div>
-			</form>
-		</section>
-		<section>
-			<h3>Result Vector</h3>
-			<span>Distance:</span>
-			<h1 id="distance__result">0.0</h1>
-			<span>Azimuth:</span>
-			<h1 id="azimuth__result">0.0</h1>
-		</section>
-		<section>
-			<h3>Old Spot</h3>
-			<form>
-				<div class="row">
-					<label for="distance__old">Distance:</label>
-					<input type="number" id="distance__old">
+					<label for="distance__friend">Distance:</label>
+					<input type="number" id="distance__friend">
 				</div>
 				<div class="row">
-					<label for="azimuth__old">Azimuth:</label>
-					<input type="number" id="azimuth__old">
+					<label for="azimuth__friend">Azimuth:</label>
+					<input type="number" id="azimuth__friend">
 				</div>
-			</form>
-			<a class="btn confirm" href="#">Relocate</a>
-		</section>
-		<section>
-			<a class="btn" href="#">10:00</a>
-			<a class="btn confirm" href="#">Reset All</a>
-		</section>
+			</fieldset>
+			<section id="result">
+				<h3>Result Vector</h3>
+				<span>Distance:</span>
+				<h1 id="distance__result">0.0</h1>
+				<span>Azimuth:</span>
+				<h1 id="azimuth__result">0.0</h1>
+			</section>
+			<section id="relocate">
+				<h3>Old Spot</h3>
+				<form>
+					<div class="row">
+						<label for="distance__old">Distance:</label>
+						<input type="number" id="distance__old">
+					</div>
+					<div class="row">
+						<label for="azimuth__old">Azimuth:</label>
+						<input type="number" id="azimuth__old">
+					</div>
+				</form>
+				<a class="btn confirm" href="#">Relocate</a>
+			</section>
+			<section id="utils">
+				<a class="btn" href="#">10:00</a>
+				<a class="btn confirm" href="#">Reset All</a>
+			</section>
+		</div>
 		<script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>

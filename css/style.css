@@ -23,7 +23,8 @@
 /* BASE STYLES
 /*******************************************/
 html {
-   font-size: 62.5%;
+   /* font-size: 62.5%; */
+   font-size: 20pt;
 }
 
 body {
@@ -44,10 +45,14 @@ footer {
 
 }
 
-section {
+section, fieldset {
    background: #333333;
-   margin-left: 10px;
-   margin-bottom: 7px;
+}
+
+legend {
+   background: #333333;
+   width: 100%;
+   padding-left: 7px;
 }
 
 h1 {
@@ -68,10 +73,19 @@ h3 {
    text-decoration: none;
    font-size: 1.125rem;
    margin: 3px;
+   border: none;
 }
 
 .btn-list {
-   padding: 3px;
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   grid-template-rows: repeat(2, 1fr);
+}
+
+.wrapper {
+   display: grid;
+   grid-template-columns: repeat(2, 1fr);
+   gap: 10px;
 }
 
 .selected {
@@ -96,4 +110,14 @@ label {
    color: white;
    background: #e77c48;
    border-style: none;
+}
+
+.no-highlight {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge*/
+   user-select: none;          /* Non-prefixed version, currently
+                                  not supported by any browser */
 }
