@@ -19,39 +19,39 @@
 			<fieldset id="target">
 				<legend>Target Position</legend>
 				<div class="btn-list">
-					<input type="button" value="Location 1" class="btn selected">
-					<input type="button" value="Location 2" class="btn">
-					<input type="button" value="Location 3" class="btn">
-					<input type="button" value="Location 4" class="btn">
-					<input type="button" value="Location 5" class="btn">
-					<input type="button" value="Location 6" class="btn">
+					<input type="button" value="Location 1" name="tl1" class="btn selected">
+					<input type="button" value="Location 2" name="tl2" class="btn">
+					<input type="button" value="Location 3" name="tl3" class="btn">
+					<input type="button" value="Location 4" name="tl4" class="btn">
+					<input type="button" value="Location 5" name="tl5" class="btn">
+					<input type="button" value="Location 6" name="tl6" class="btn">
 				</div>
 				<div class="row">
 					<label for="distance__target">Distance:</label>
-					<input type="number" id="distance__target">
+					<input type="number" id="distance__target" class="input" min="0">
 				</div>
 				<div class="row">
 					<label for="azimuth__target">Azimuth:</label>
-					<input type="number" id="azimuth__target">
+					<input type="number" id="azimuth__target" class="input" min="0" max="359">
 				</div>
 			</fieldset>
-			<fieldset id="">
+			<fieldset id="friend">
 				<legend>Friendly Positions</legend>
 				<div class="btn-list">
-					<input type="button" value="Location 1" class="btn selected">
-					<input type="button" value="Location 2" class="btn">
-					<input type="button" value="Location 3" class="btn">
-					<input type="button" value="Location 4" class="btn">
-					<input type="button" value="Location 5" class="btn">
-					<input type="button" value="Location 6" class="btn">
+					<input type="button" value="Location 1" name="fl1" class="btn selected">
+					<input type="button" value="Location 2" name="fl2" class="btn">
+					<input type="button" value="Location 3" name="fl3" class="btn">
+					<input type="button" value="Location 4" name="fl4" class="btn">
+					<input type="button" value="Location 5" name="fl5" class="btn">
+					<input type="button" value="Location 6" name="fl6" class="btn">
 				</div>
 				<div class="row">
 					<label for="distance__friend">Distance:</label>
-					<input type="number" id="distance__friend">
+					<input type="number" id="distance__friend" class="input" min="0">
 				</div>
 				<div class="row">
 					<label for="azimuth__friend">Azimuth:</label>
-					<input type="number" id="azimuth__friend">
+					<input type="number" id="azimuth__friend" class="input" min="0" max="359">
 				</div>
 			</fieldset>
 			<section id="result">
@@ -66,11 +66,11 @@
 				<form>
 					<div class="row">
 						<label for="distance__old">Distance:</label>
-						<input type="number" id="distance__old">
+						<input type="number" id="distance__old" min="0">
 					</div>
 					<div class="row">
 						<label for="azimuth__old">Azimuth:</label>
-						<input type="number" id="azimuth__old">
+						<input type="number" id="azimuth__old" min="0" max="359">
 					</div>
 				</form>
 				<a class="btn confirm" href="#">Relocate</a>

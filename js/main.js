@@ -1,43 +1,42 @@
 
-document.addEventListener('keydown',)
-let targets = document.querySelectorAll('#target .btn')
-let friends = document.querySelectorAll('#friend .btn')
+// document.addEventListener('keydown',)
+
+let locationData = {}
 
 class Location {
-   constructor() {
-      this.name = ''
+   constructor(name) {
+      this.name = name
       this.distance = 0
       this.azimuth = 0
    }
 
-   get distance() {
-      return this.distance
+}
+
+function init() {
+   let ids = ['target', 'friend']
+
+   for (let id of ids) {
+      let btn_list = document.querySelectorAll(`#${id} .btn`)
+      initButtonList(btn_list)
+
+      let inputs = document.querySelectorAll(`#${id} .input`)
+      initInputList(inputs)
    }
-
-   set distance(x) {
-      if (x && x >= 0) {
-         this.distance = x
-      }
-   }
-
-   get azimuth() {
-      return this.azimuth
-   }
-
-   set azimuth(x) {
-      if (x && x >= 0) {
-         this.azimuth = x
-      }
-   }
-
-
 }
 
 function initButtonList(btn_list) {
    btn_list.forEach(element => {
       element.addEventListener('click', selectLocation)
       element.addEventListener('dblclick', renameButton)
+      locationData[element.name] = new Location(element.value)
    });
+   loadLocation(btn_list[0])
+}
+
+function initInputList(inputs) {
+   inputs.forEach(element => {
+      element.addEventListener('change', saveLocation)
+   })
 }
 
 function selectLocation(click) {
@@ -50,6 +49,7 @@ function selectLocation(click) {
 
       click.target.classList.add('selected')
    }
+   loadLocation(click.target)
 }
 
 function renameButton(click) {
@@ -58,6 +58,25 @@ function renameButton(click) {
    input.focus()
 }
 
+function loadLocation(selected) {
+   const data = locationData[selected.name]
 
-initButtonList(targets)
-initButtonList(friends)
+   let set = selected.name.includes('tl')
+      ? 'target'
+      : 'friend'
+
+   document.querySelector(`#distance__${set}`).value = data.distance
+   document.querySelector(`#azimuth__${set}`).value = data.azimuth
+}
+
+function saveLocation(changed) {
+   let [attribute, team] = changed.target.id.split('__')
+   let value = changed.target.value
+
+   let selected = document.querySelector(`#${team} .btn.selected`)
+   if (selected) {
+      locationData[selected.name][attribute] = Number(value)
+   }
+}
+
+init()
