@@ -5,6 +5,9 @@
 
 let locationData = {}
 
+/******************************************************************************
+ * 1. Classes
+ *****************************************************************************/
 class Location {
    constructor(d = 1, a = 0) {
       this.distance = d
@@ -50,15 +53,11 @@ class Angle {
       return radians * 180 / Math.PI
    }
 
-   // Since JS doesn't have operator overloading for objects
-   negate = () => new Angle(-this.radians)
-   subtract = (rhs) => new Angle(this.radians - rhs.radians)
-   add = (rhs) => new Angle(this.radians + rhs.radians)
-   lessThan = (rhs) => this.radians < rhs.radians
-   greaterThan = (rhs) => this.radians > rhs.radians
-
 }
 
+/******************************************************************************
+ * 2. Initialization
+ *****************************************************************************/
 function init() {
    let ids = ['target', 'friend']
 
@@ -82,9 +81,16 @@ function initButtonList(btn_list) {
 
 function initInputList(inputs) {
    inputs.forEach(element => {
-      element.addEventListener('change', saveLocation)
-      element.addEventListener('change', calcVector)
+      element.addEventListener('change', onTextBoxUpdate)
    })
+}
+
+/******************************************************************************
+ * 3. Event Handlers
+ *****************************************************************************/
+function onTextBoxUpdate(event) {
+   saveLocation(event)
+   updateResults()
 }
 
 function selectLocation(click) {
@@ -98,12 +104,35 @@ function selectLocation(click) {
       click.target.classList.add('selected')
    }
    loadLocation(click.target)
+   updateResults();
 }
 
 function renameButton(click) {
    click.target.innerHTML = `<input type="text" value=${click.target.value}>`
    input.classList.remove('hidden')
    input.focus()
+}
+
+/******************************************************************************
+ * X. ???
+ *****************************************************************************/
+function getSelectedButtons() {
+   let key_f = document.querySelector('#friend .btn.selected').name
+   let key_t = document.querySelector('#target .btn.selected').name
+
+   let friend = locationData[key_f]
+   let target = locationData[key_t]
+   return [friend, target]
+
+}
+
+function updateResults() {
+   let [friend, target] = getSelectedButtons();
+
+   const result = calcVector(friend, target);
+
+   document.querySelector('#distance__result').innerText = result.distance.toFixed(1)
+   document.querySelector('#azimuth__result').innerText = result.azimuth.toFixed(1)
 }
 
 function loadLocation(selected) {
@@ -127,16 +156,7 @@ function saveLocation(changed) {
    }
 }
 
-function calcVector() {
-   let key_t = document.querySelector('#target .btn.selected').name
-   let key_f = document.querySelector('#friend .btn.selected').name
-
-   let target = locationData[key_t]
-   let friend = locationData[key_f]
-   let result = calc(friend, target)
-}
-
-function calc(friend, target) {
+function calcVector(friend, target) {
    if (friend.equals(target)) {
       return new Location(0, 0)
    }
@@ -162,7 +182,6 @@ function calc(friend, target) {
       return new Angle(Math.acos(cosC))
    }
 
-
    const SF = new Side(friend.distance) // Spotter to Friend
    const ST = new Side(target.distance) // Spotter to Target
    let FT                               // Friend  to Target (result)
@@ -177,11 +196,11 @@ function calc(friend, target) {
    const PI = new Angle(Math.PI) // 180 degree angle for easy computing
 
    delta = new Angle(Math.abs(NSF.radians - NST.radians))
+
    FT = lawOfCosinesTwoSides(SF, ST, delta)
+
    // Order matters here. Side ST must always be the 3rd parameter.
    SFT = lawOfCosinesThreeSides(SF, FT, ST)
-   console.log(SF.length, FT.length, ST.length, SFT.radians)
-   SFT_degrees = Math.round(SFT.degrees)
 
    // Make sure Angle stays between 0 - 360 degrees or 0 and 2PI radians
    delta.validate()
@@ -189,14 +208,12 @@ function calc(friend, target) {
 
    NFT = new Angle(
       NSF.radians
-         + PI.radians
-         + (delta.degrees > PI.degrees ^ NST.radians > NSF.radians)
+      + PI.radians
+      + ((delta.degrees > PI.degrees ^ NST.radians > NSF.radians)
          ? (-SFT.radians)
-         : SFT.radians
+         : SFT.radians)
    )
-   console.log(NFT)
    NFT.validate()
-
 
    return new Location(FT.length, Angle.toDegrees(NFT.radians))
 
