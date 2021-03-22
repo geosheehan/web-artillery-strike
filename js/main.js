@@ -5,6 +5,7 @@
 
 let locationData = {};
 
+document.getElementById('debug').addEventListener('click', () => console.log(locationData))
 /******************************************************************************
  * 1. Classes
  *****************************************************************************/
@@ -160,11 +161,16 @@ function relocate() {
 
    if (newLocation.distance === '' || newLocation.azimuth === '') return;
 
-   newLocation.azimuth = ((newLocation.azimuth + 180) % 360); // point the other way
+   newLocation.distance = Number(newLocation.distance);
+   newLocation.azimuth = ((Number(newLocation.azimuth) + 180) % 360); // point the other way
 
    for (const key in locationData) {
-      if (!location[key].default) {
+      if (!locationData[key].default) {
          locationData[key] = calcVector(newLocation, locationData[key]);
+         const button = document.querySelector(`input[name="${key}"]`);
+         if (Array.from(button.classList).includes('selected')) {
+            button.click();
+         }
       }
    }
 
@@ -216,8 +222,8 @@ function loadLocation(selected) {
       ? 'target'
       : 'friend';
 
-   document.querySelector(`#distance__${set}`).value = data.distance;
-   document.querySelector(`#azimuth__${set}`).value = data.azimuth;
+   document.querySelector(`#distance__${set}`).value = Math.round(data.distance);
+   document.querySelector(`#azimuth__${set}`).value = Math.round(data.azimuth);
 }
 
 function saveLocation(changed) {
