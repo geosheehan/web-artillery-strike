@@ -3,54 +3,54 @@
 
 // document.addEventListener('keydown',)
 
-let locationData = {}
+let locationData = {};
 
 /******************************************************************************
  * 1. Classes
  *****************************************************************************/
 class Location {
    constructor(d = 1, a = 0) {
-      this.distance = d
-      this.azimuth = a
+      this.distance = d;
+      this.azimuth = a;
    }
 
    equals(rhs) {
       return (this.distance === rhs.distance
-         && this.azimuth === rhs.azimuth)
+         && this.azimuth === rhs.azimuth);
    }
 }
 
 class Side {
    constructor(l = 0) {
-      this.length = l
+      this.length = l;
    }
 }
 
 class Angle {
    constructor(a = 0) {
-      this._radians = a
-      this.degrees = Angle.toDegrees(a)
+      this._radians = a;
+      this.degrees = Angle.toDegrees(a);
    }
 
    get radians() {
-      return this._radians
+      return this._radians;
    }
 
    set radians(r) {
-      this._radians = r
-      this.degrees = Angle.toDegrees(this._radians)
+      this._radians = r;
+      this.degrees = Angle.toDegrees(this._radians);
    }
 
    validate() {
-      let degrees = this.degrees % 360
-      this.radians = Angle.toRadians(degrees)
+      let degrees = this.degrees % 360;
+      this.radians = Angle.toRadians(degrees);
    }
 
    static toRadians(degrees) {
-      return degrees * Math.PI / 180
+      return degrees * Math.PI / 180;
    }
    static toDegrees(radians) {
-      return radians * 180 / Math.PI
+      return radians * 180 / Math.PI;
    }
 
 }
@@ -59,151 +59,185 @@ class Angle {
  * 2. Initialization
  *****************************************************************************/
 function init() {
-   let ids = ['target', 'friend']
+   const ids = ['target', 'friend'];
 
    for (let id of ids) {
-      let btn_list = document.querySelectorAll(`#${id} .btn`)
-      initButtonList(btn_list)
+      const btn_list = document.querySelectorAll(`#${id} .btn`);
+      initButtonList(btn_list);
 
-      let inputs = document.querySelectorAll(`#${id} .input`)
-      initInputList(inputs)
+      const inputs = document.querySelectorAll(`#${id} .input`);
+      initInputList(inputs);
    }
+
+   const confirms = document.querySelectorAll('.btn.confirm');
+   initConfirmationButtons(confirms);
 }
 
 function initButtonList(btn_list) {
    btn_list.forEach(element => {
-      element.addEventListener('click', selectLocation)
-      element.addEventListener('dblclick', renameButton)
-      locationData[element.name] = new Location()
+      element.addEventListener('click', selectLocation);
+      element.addEventListener('dblclick', renameButton);
+      locationData[element.name] = new Location();
    });
-   loadLocation(btn_list[0])
+   loadLocation(btn_list[0]);
 }
 
 function initInputList(inputs) {
    inputs.forEach(element => {
-      element.addEventListener('change', onTextBoxUpdate)
-   })
+      element.addEventListener('change', onTextBoxUpdate);
+   });
+}
+
+function initConfirmationButtons(btn_list) {
+   btn_list.forEach(element => {
+      element.addEventListener('click', confirmClick);
+      element.addEventListener('blur', () => element.classList.remove('selected'));
+   });
 }
 
 /******************************************************************************
  * 3. Event Handlers
  *****************************************************************************/
 function onTextBoxUpdate(event) {
-   saveLocation(event)
-   updateResults()
+   saveLocation(event);
+   updateResults();
 }
 
 function selectLocation(click) {
-   let parent = click.target.parentElement
+   let parent = click.target.parentElement;
    if (parent) {
-      let children = parent.querySelectorAll('.btn')
+      let children = parent.querySelectorAll('.btn');
       children.forEach(element => {
-         element.classList.remove('selected')
-      })
+         element.classList.remove('selected');
+      });
 
-      click.target.classList.add('selected')
+      click.target.classList.add('selected');
    }
-   loadLocation(click.target)
+   loadLocation(click.target);
    updateResults();
 }
 
 function renameButton(click) {
-   click.target.innerHTML = `<input type="text" value=${click.target.value}>`
-   input.classList.remove('hidden')
-   input.focus()
+   click.target.innerHTML = `<input type="text" value=${click.target.value}>`;
+   input.classList.remove('hidden');
+   input.focus();
+}
+
+/* Call backs stored in HTML */
+function reset() {
+   for (let item in locationData) {
+      locationData[item] = new Location();
+   }
+   const selected = getSelectedButtons();
+   selected.forEach((button) => button.click());
+}
+
+/******************************************************************************
+ * 4. Confirmation Buttons
+ *****************************************************************************/
+function confirmClick() {
+   if (Array.from(this.classList).includes('selected')) {
+      this.classList.remove('selected');
+      const callback = window[this.dataset.callback];
+      if (typeof callback === 'function') callback.apply(this);
+   }
+   else {
+      this.classList.add('selected');
+   }
 }
 
 /******************************************************************************
  * X. ???
  *****************************************************************************/
 function getSelectedButtons() {
-   let key_f = document.querySelector('#friend .btn.selected').name
-   let key_t = document.querySelector('#target .btn.selected').name
+   return ['friend', 'target'].map((id) => {
+      document.querySelector(`#${id} .btn.selected`);
+   });
+}
 
-   let friend = locationData[key_f]
-   let target = locationData[key_t]
-   return [friend, target]
-
+function getSelectedLocations() {
+   const buttons = getSelectedButtons();
+   return buttons.map((button) => locationData[button.name]);
 }
 
 function updateResults() {
-   let [friend, target] = getSelectedButtons();
+   let [friend, target] = getSelectedLocations();
 
    const result = calcVector(friend, target);
 
-   document.querySelector('#distance__result').innerText = result.distance.toFixed(1)
-   document.querySelector('#azimuth__result').innerText = result.azimuth.toFixed(1)
+   document.querySelector('#distance__result').innerText = result.distance.toFixed(1);
+   document.querySelector('#azimuth__result').innerText = result.azimuth.toFixed(1);
 }
 
 function loadLocation(selected) {
-   const data = locationData[selected.name]
+   const data = locationData[selected.name];
 
    let set = selected.name.includes('tl')
       ? 'target'
-      : 'friend'
+      : 'friend';
 
-   document.querySelector(`#distance__${set}`).value = data.distance
-   document.querySelector(`#azimuth__${set}`).value = data.azimuth
+   document.querySelector(`#distance__${set}`).value = data.distance;
+   document.querySelector(`#azimuth__${set}`).value = data.azimuth;
 }
 
 function saveLocation(changed) {
-   let [attribute, team] = changed.target.id.split('__')
-   let value = changed.target.value
+   let [attribute, team] = changed.target.id.split('__');
+   let value = changed.target.value;
 
-   let selected = document.querySelector(`#${team} .btn.selected`)
+   let selected = document.querySelector(`#${team} .btn.selected`);
    if (selected) {
-      locationData[selected.name][attribute] = Number(value)
+      locationData[selected.name][attribute] = Number(value);
    }
 }
 
 function calcVector(friend, target) {
    if (friend.equals(target)) {
-      return new Location(0, 0)
+      return new Location(0, 0);
    }
 
    function lawOfCosinesTwoSides(a, b, theta) {
-      let c = new Side()
-      let a_2 = a.length ** 2
-      let b_2 = b.length ** 2
-      let cosine = 2 * a.length * b.length * Math.cos(theta.radians)
+      let c = new Side();
+      let a_2 = a.length ** 2;
+      let b_2 = b.length ** 2;
+      let cosine = 2 * a.length * b.length * Math.cos(theta.radians);
 
-      let c_2 = a_2 + b_2 - cosine
-      c.length = Math.sqrt(c_2)
-      return c
-   }
+      let c_2 = a_2 + b_2 - cosine;
+      c.length = Math.sqrt(c_2);
+      return c;
+   };
 
    function lawOfCosinesThreeSides(a, b, c) {
-      let a_2 = a.length ** 2
-      let b_2 = b.length ** 2
-      let c_2 = c.length ** 2
-      let divisor = 2 * a.length * b.length
+      let a_2 = a.length ** 2;
+      let b_2 = b.length ** 2;
+      let c_2 = c.length ** 2;
+      let divisor = 2 * a.length * b.length;
 
-      let cosC = (a_2 + b_2 - c_2) / divisor
-      return new Angle(Math.acos(cosC))
-   }
+      let cosC = (a_2 + b_2 - c_2) / divisor;
+      return new Angle(Math.acos(cosC));
+   };
 
-   const SF = new Side(friend.distance) // Spotter to Friend
-   const ST = new Side(target.distance) // Spotter to Target
-   let FT                               // Friend  to Target (result)
+   const SF = new Side(friend.distance); // Spotter to Friend
+   const ST = new Side(target.distance); // Spotter to Target
+   let FT;                               // Friend  to Target (result)
 
-   const NSF = new Angle(Angle.toRadians(friend.azimuth)) // North to Spotter to Friend
-   const NST = new Angle(Angle.toRadians(target.azimuth)) // North to Spotter to Target
-   let NFT                                                // North to Friend  to Target (result)
+   const NSF = new Angle(Angle.toRadians(friend.azimuth)); // North to Spotter to Friend
+   const NST = new Angle(Angle.toRadians(target.azimuth)); // North to Spotter to Target
+   let NFT;                                               // North to Friend  to Target (result)
 
    // Calculated values
-   let SFT                       // Spotter to Friend to Target
-   let delta                     // Change between NSF and NST
-   const PI = new Angle(Math.PI) // 180 degree angle for easy computing
+   let SFT;                       // Spotter to Friend to Target
+   let delta;                     // Change between NSF and NST
+   const PI = new Angle(Math.PI); // 180 degree angle for easy computing
 
-   delta = new Angle(Math.abs(NSF.radians - NST.radians))
+   delta = new Angle(Math.abs(NSF.radians - NST.radians));
 
-   FT = lawOfCosinesTwoSides(SF, ST, delta)
+   FT = lawOfCosinesTwoSides(SF, ST, delta);
 
    // Order matters here. Side ST must always be the 3rd parameter.
-   SFT = lawOfCosinesThreeSides(SF, FT, ST)
+   SFT = lawOfCosinesThreeSides(SF, FT, ST);
 
    // Make sure Angle stays between 0 - 360 degrees or 0 and 2PI radians
-   delta.validate()
+   delta.validate();
    //NFT = NSF + PI + ((delta.degrees > PI.degrees ^ NST > NSF) ? -SFT : SFT)
 
    NFT = new Angle(
@@ -212,11 +246,11 @@ function calcVector(friend, target) {
       + ((delta.degrees > PI.degrees ^ NST.radians > NSF.radians)
          ? (-SFT.radians)
          : SFT.radians)
-   )
-   NFT.validate()
+   );
+   NFT.validate();
 
-   return new Location(FT.length, Angle.toDegrees(NFT.radians))
+   return new Location(FT.length, Angle.toDegrees(NFT.radians));
 
 }
 
-init()
+init();
