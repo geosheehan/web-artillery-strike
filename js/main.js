@@ -4,6 +4,7 @@
 // document.addEventListener('keydown',)
 
 let locationData = {};
+let timerID = 0;
 
 document.getElementById('debug').addEventListener('click', () => console.log(locationData))
 /******************************************************************************
@@ -91,6 +92,9 @@ function init() {
 
    const confirms = document.querySelectorAll('.btn.confirm');
    initConfirmationButtons(confirms);
+
+   const timer = document.getElementById('timer');
+   timer.addEventListener('click', toggleTimer);
 }
 
 function initButtonList(btn_list) {
@@ -143,6 +147,39 @@ function renameButton(click) {
    input.focus();
 }
 
+function toggleTimer() {
+   const clock = document.getElementById('timer')
+   if (!timerID) {
+      timerID = setInterval(tick, 1000, clock);
+      clock.classList.add('selected');
+      console.log('Starting timer');
+   }
+   else {
+      clearInterval(timerID);
+      timerID = 0;
+      clock.classList.remove('selected');
+      clock.value = '10:00';
+      console.log('Stopping timer');
+   }
+}
+
+function tick(clock) {
+   console.log(clock);
+   let [min, sec] = clock.value.split(':');
+   let time = ((Number(min) * 60) + Number(sec));
+
+   if (time > 0) {
+      time -= 1;
+      console.log(time);
+      min = String(~~(time / 60)).padStart(2, '0');
+      sec = String(~~time % 60).padStart(2, '0');
+      clock.value = `${min}:${sec}`;
+   }
+   else {
+      clock.classList.toggle('selected');
+   }
+}
+
 /* Call backs stored in HTML */
 function reset() {
    for (let item in locationData) {
@@ -173,7 +210,6 @@ function relocate() {
          }
       }
    }
-
 
 }
 
