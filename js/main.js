@@ -9,9 +9,28 @@ let locationData = {};
  * 1. Classes
  *****************************************************************************/
 class Location {
-   constructor(d = 1, a = 0) {
-      this.distance = d;
-      this.azimuth = a;
+   constructor(distance = 1, azimuth = 0) {
+      this._distance = distance;
+      this._azimuth = azimuth;
+      this.default = true;
+   }
+
+   get distance() {
+      return this._distance;
+   }
+
+   set distance(value) {
+      this.default = false;
+      this._distance = value;
+   }
+
+   get azimuth() {
+      return this._azimuth;
+   }
+
+   set azimuth(value) {
+      this.default = false;
+      this._azimuth = value;
    }
 
    equals(rhs) {
@@ -132,6 +151,26 @@ function reset() {
    selected.forEach((button) => button.click());
 }
 
+function relocate() {
+   const newLocation = ['distance', 'azimuth'].reduce(
+      (location, element) => {
+         location[element] = document.querySelector(`#${element}__old`).value;
+         return location;
+      }, new Location());
+
+   if (newLocation.distance === '' || newLocation.azimuth === '') return;
+
+   newLocation.azimuth = ((newLocation.azimuth + 180) % 360); // point the other way
+
+   for (const key in locationData) {
+      if (!location[key].default) {
+         locationData[key] = calcVector(newLocation, locationData[key]);
+      }
+   }
+
+
+}
+
 /******************************************************************************
  * 4. Confirmation Buttons
  *****************************************************************************/
@@ -150,9 +189,10 @@ function confirmClick() {
  * X. ???
  *****************************************************************************/
 function getSelectedButtons() {
-   return ['friend', 'target'].map((id) => {
-      document.querySelector(`#${id} .btn.selected`);
+   const thing = ['friend', 'target'].map((id) => {
+      return document.querySelector(`#${id} .btn.selected`);
    });
+   return thing;
 }
 
 function getSelectedLocations() {
