@@ -202,6 +202,8 @@ function tick(clock) {
 /* Call backs stored in HTML */
 function reset() {
    for (let item in LOCATION_DATA) {
+      const button = document.querySelector(`input[name="${item}"]`);
+      button.value = `Location ${item[item.length - 1]}`;
       LOCATION_DATA[item] = new Location();
    }
    const selected = getSelectedButtons();
