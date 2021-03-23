@@ -67,6 +67,10 @@ h3 {
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
+:root {
+   --accent: #e77c48;
+}
+
 .btn {
    color: white;
    background: #444444;
@@ -89,7 +93,7 @@ h3 {
 }
 
 .selected {
-   background: #e77c48;
+   background: var(--accent);
 }
 
 .hidden {
@@ -102,14 +106,22 @@ input {
    font-size: .9rem;
 }
 
+input[type="text"] {
+   text-align: center;
+}
+
 label {
    font-size: .975rem;
 }
 
 .btn input {
    color: white;
-   background: #e77c48;
+   background: var(--accent);
    border-style: none;
+}
+
+.rename {
+   background: var(--accent);
 }
 
 .no-highlight {

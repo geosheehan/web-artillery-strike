@@ -3,10 +3,10 @@
 
 // document.addEventListener('keydown',)
 
-let locationData = {};
-let timerID = 0;
+let LOCATION_DATA = {};
+let TIMER_ID = 0;
 
-document.getElementById('debug').addEventListener('click', () => console.log(locationData))
+document.getElementById('debug').addEventListener('click', () => console.log(LOCATION_DATA))
 /******************************************************************************
  * 1. Classes
  *****************************************************************************/
@@ -88,6 +88,9 @@ function init() {
 
       const inputs = document.querySelectorAll(`#${id} .input`);
       initInputList(inputs);
+
+      const btn_rename = document.querySelectorAll(`#${id} input[type="text"]`);
+      initRenameButtons(btn_rename);
    }
 
    const confirms = document.querySelectorAll('.btn.confirm');
@@ -101,7 +104,7 @@ function initButtonList(btn_list) {
    btn_list.forEach(element => {
       element.addEventListener('click', selectLocation);
       element.addEventListener('dblclick', renameButton);
-      locationData[element.name] = new Location();
+      LOCATION_DATA[element.name] = new Location();
    });
    loadLocation(btn_list[0]);
 }
@@ -119,6 +122,12 @@ function initConfirmationButtons(btn_list) {
    });
 }
 
+function initRenameButtons(btn_list) {
+   btn_list.forEach(element => {
+      element.addEventListener('blur', applyRename)
+   });
+}
+
 /******************************************************************************
  * 3. Event Handlers
  *****************************************************************************/
@@ -128,35 +137,45 @@ function onTextBoxUpdate(event) {
 }
 
 function selectLocation(click) {
-   let parent = click.target.parentElement;
+   let parent = this.parentElement;
    if (parent) {
       let children = parent.querySelectorAll('.btn');
       children.forEach(element => {
          element.classList.remove('selected');
       });
 
-      click.target.classList.add('selected');
+      this.classList.add('selected');
    }
-   loadLocation(click.target);
+   loadLocation(this);
    updateResults();
 }
 
-function renameButton(click) {
-   click.target.innerHTML = `<input type="text" value=${click.target.value}>`;
+function renameButton() {
+   this.classList.add('hidden');
+   const input = document.querySelector(`input[name="i${this.name}"]`);
+   input.value = this.value;
    input.classList.remove('hidden');
-   input.focus();
+   // input.focus();
+   input.select();
+}
+
+function applyRename() {
+   this.classList.add('hidden');
+   const button = document.querySelector(`input[name="${this.name.slice(1)}"]`);
+   button.value = this.value;
+   button.classList.remove('hidden');
 }
 
 function toggleTimer() {
    const clock = document.getElementById('timer')
-   if (!timerID) {
-      timerID = setInterval(tick, 1000, clock);
+   if (!TIMER_ID) {
+      TIMER_ID = setInterval(tick, 1000, clock);
       clock.classList.add('selected');
       console.log('Starting timer');
    }
    else {
-      clearInterval(timerID);
-      timerID = 0;
+      clearInterval(TIMER_ID);
+      TIMER_ID = 0;
       clock.classList.remove('selected');
       clock.value = '10:00';
       console.log('Stopping timer');
@@ -182,8 +201,8 @@ function tick(clock) {
 
 /* Call backs stored in HTML */
 function reset() {
-   for (let item in locationData) {
-      locationData[item] = new Location();
+   for (let item in LOCATION_DATA) {
+      LOCATION_DATA[item] = new Location();
    }
    const selected = getSelectedButtons();
    selected.forEach((button) => button.click());
@@ -201,9 +220,9 @@ function relocate() {
    newLocation.distance = Number(newLocation.distance);
    newLocation.azimuth = ((Number(newLocation.azimuth) + 180) % 360); // point the other way
 
-   for (const key in locationData) {
-      if (!locationData[key].default) {
-         locationData[key] = calcVector(newLocation, locationData[key]);
+   for (const key in LOCATION_DATA) {
+      if (!LOCATION_DATA[key].default) {
+         LOCATION_DATA[key] = calcVector(newLocation, LOCATION_DATA[key]);
          const button = document.querySelector(`input[name="${key}"]`);
          if (Array.from(button.classList).includes('selected')) {
             button.click();
@@ -239,7 +258,7 @@ function getSelectedButtons() {
 
 function getSelectedLocations() {
    const buttons = getSelectedButtons();
-   return buttons.map((button) => locationData[button.name]);
+   return buttons.map((button) => LOCATION_DATA[button.name]);
 }
 
 function updateResults() {
@@ -252,7 +271,7 @@ function updateResults() {
 }
 
 function loadLocation(selected) {
-   const data = locationData[selected.name];
+   const data = LOCATION_DATA[selected.name];
 
    let set = selected.name.includes('tl')
       ? 'target'
@@ -268,7 +287,7 @@ function saveLocation(changed) {
 
    let selected = document.querySelector(`#${team} .btn.selected`);
    if (selected) {
-      locationData[selected.name][attribute] = Number(value);
+      LOCATION_DATA[selected.name][attribute] = Number(value);
    }
 }
 
