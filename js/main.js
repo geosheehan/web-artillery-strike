@@ -206,6 +206,12 @@ function reset() {
       button.value = `Location ${item[item.length - 1]}`;
       LOCATION_DATA[item] = new Location();
    }
+
+   for (let id of ['distance', 'azimuth']) {
+      const input = document.querySelector(`#${id}__old`);
+      input.value = '';
+   }
+
    const selected = getSelectedButtons();
    selected.forEach((button) => button.click());
 }
@@ -213,7 +219,9 @@ function reset() {
 function relocate() {
    const newLocation = ['distance', 'azimuth'].reduce(
       (location, element) => {
-         location[element] = document.querySelector(`#${element}__old`).value;
+         const input = document.querySelector(`#${element}__old`);
+         input.value = '';
+         location[element] = input.value;
          return location;
       }, new Location());
 
