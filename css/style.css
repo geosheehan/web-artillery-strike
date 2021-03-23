@@ -22,6 +22,33 @@
 /******************************************
 /* BASE STYLES
 /*******************************************/
+:root {
+   --selected: #e77c48;
+   --selected-font: black;
+   --primary: #333333;
+   --secondary: #575757;
+   --background: #7e7e7e;
+
+}
+
+.colonial {
+   --selected: #e77c48;
+   --selected-font: black;
+   --primary: #1c3518;
+   --secondary: #4c5a3e;
+   --tertiary: #879D7B;
+   --background: #dae4ce;
+}
+
+.warden {
+   --selected: #e77c48;
+   --selected-font: black;
+   --primary: #263e53;
+   --secondary: #245582;
+   --tertiary: #4c66a8;
+   --background: #dbd9d8;
+}
+
 html {
    /* font-size: 62.5%; */
    font-size: 20pt;
@@ -29,14 +56,14 @@ html {
 
 body {
    color: white;
-   background: #646464;
+   background: var(--background);
    font-family: 'Didact Gothic', sans-serif;
 }
-
 
 /******************************************
 /* LAYOUT
 /*******************************************/
+
 /* header {
 
 }
@@ -46,11 +73,11 @@ footer {
 } */
 
 section, fieldset {
-   background: #333333;
+   background: var(--primary);
 }
 
 legend {
-   background: #333333;
+   background: var(--primary);
    width: 100%;
    padding-left: 7px;
 }
@@ -67,13 +94,9 @@ h3 {
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
-:root {
-   --accent: #e77c48;
-}
-
 .btn {
    color: white;
-   background: #444444;
+   background: var(--secondary);
    text-decoration: none;
    font-size: 1.125rem;
    margin: 3px;
@@ -93,7 +116,8 @@ h3 {
 }
 
 .selected {
-   background: var(--accent);
+   color: var(--selected-font);
+   background: var(--selected);
 }
 
 .hidden {
@@ -101,13 +125,14 @@ h3 {
 }
 
 input {
-   color: white;
-   background: #646464;
+   color: var(--selected-font);
+   background: var(--tertiary);
    font-size: .9rem;
 }
 
 input[type="text"] {
    text-align: center;
+   border: none;
 }
 
 label {
@@ -116,12 +141,12 @@ label {
 
 .btn input {
    color: white;
-   background: var(--accent);
+   background: var(--selected);
    border-style: none;
 }
 
 .rename {
-   background: var(--accent);
+   background: var(--selected);
 }
 
 .no-highlight {
