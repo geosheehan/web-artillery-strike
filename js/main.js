@@ -96,8 +96,12 @@ function init() {
    const confirms = document.querySelectorAll('.btn.confirm');
    initConfirmationButtons(confirms);
 
+   const themes = document.querySelectorAll('.theme');
+   initColorSchemes(themes);
+
    const timer = document.getElementById('timer');
    timer.addEventListener('click', toggleTimer);
+
 }
 
 function initButtonList(btn_list) {
@@ -111,7 +115,7 @@ function initButtonList(btn_list) {
 
 function initInputList(inputs) {
    inputs.forEach(element => {
-      element.addEventListener('change', onTextBoxUpdate);
+      element.addEventListener('input', onTextBoxUpdate);
    });
 }
 
@@ -125,6 +129,12 @@ function initConfirmationButtons(btn_list) {
 function initRenameButtons(btn_list) {
    btn_list.forEach(element => {
       element.addEventListener('blur', applyRename)
+   });
+}
+
+function initColorSchemes(btn_list) {
+   btn_list.forEach(element => {
+      element.addEventListener('click', updateTheme);
    });
 }
 
@@ -155,7 +165,6 @@ function renameButton() {
    const input = document.querySelector(`input[name="i${this.name}"]`);
    input.value = this.value;
    input.classList.remove('hidden');
-   // input.focus();
    input.select();
 }
 
@@ -171,14 +180,12 @@ function toggleTimer() {
    if (!TIMER_ID) {
       TIMER_ID = setInterval(tick, 1000, clock);
       clock.classList.add('selected');
-      console.log('Starting timer');
    }
    else {
       clearInterval(TIMER_ID);
       TIMER_ID = 0;
       clock.classList.remove('selected');
       clock.value = '10:00';
-      console.log('Stopping timer');
    }
 }
 
@@ -197,6 +204,15 @@ function tick(clock) {
    else {
       clock.classList.toggle('selected');
    }
+}
+
+function updateTheme() {
+   const remove = getThemes();
+   const theme = this.value;
+
+   const body = document.querySelector('body');
+   body.classList.remove(...remove)
+   body.classList.add(theme);
 }
 
 /* Call backs stored in HTML */
@@ -259,6 +275,11 @@ function confirmClick() {
 /******************************************************************************
  * X. ???
  *****************************************************************************/
+function getThemes() {
+   const themes = document.querySelectorAll('.theme');
+   return Array.from(themes).map(theme => theme.value);
+}
+
 function getSelectedButtons() {
    const thing = ['friend', 'target'].map((id) => {
       return document.querySelector(`#${id} .btn.selected`);

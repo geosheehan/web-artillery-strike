@@ -2,11 +2,11 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta name="description" content="Your description goes here">
-		<meta name="keywords" content="one, two, three">
+		<meta name="description" content="">
+		<meta name="keywords" content="Foxhole, Game, Calculator, Artillery, Mortar">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Blank Template</title>
+		<title>Artillery Strike</title>
 
 		<link href="https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap" rel="stylesheet">
 
@@ -14,68 +14,78 @@
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/style.css">
 	</head>
-	<body>
+	<body class="neutral">
+		<header>
+			<input type="radio" class="theme" name="theme" id="colonial" value="colonial">
+			<label for="colonial">Colonial</label>
+			<input type="radio" class="theme" name="theme" id="neutral" value="neutral" checked>
+			<label for="neutral">Neutral</label>
+			<input type="radio" class="theme" name="theme" id="warden" value="warden">
+			<label for="warden">Warden</label>
+		</header>
 		<div class="wrapper">
-			<fieldset id="target">
-				<legend>Target Position</legend>
-				<div class="btn-list">
-					<input type="button" value="Location 1" name="tl1" class="btn selected">
-					<input type="text" name="itl1" class="rename hidden">
-					<input type="button" value="Location 2" name="tl2" class="btn">
-					<input type="text" name="itl2" class="rename hidden">
-					<input type="button" value="Location 3" name="tl3" class="btn">
-					<input type="text" name="itl3" class="rename hidden">
-					<input type="button" value="Location 4" name="tl4" class="btn">
-					<input type="text" name="itl4" class="rename hidden">
-					<input type="button" value="Location 5" name="tl5" class="btn">
-					<input type="text" name="itl5" class="rename hidden">
-					<input type="button" value="Location 6" name="tl6" class="btn">
-					<input type="text" name="itl6" class="rename hidden">
-				</div>
-				<div class="row">
-					<label for="distance__target">Distance:</label>
-					<input type="number" id="distance__target" class="input" min="1">
-				</div>
-				<div class="row">
-					<label for="azimuth__target">Azimuth:</label>
-					<input type="number" id="azimuth__target" class="input" min="0" max="359">
-				</div>
-			</fieldset>
-			<fieldset id="friend">
-				<legend>Friendly Positions</legend>
-				<div class="btn-list">
-					<input type="button" value="Location 1" name="fl1" class="btn selected">
-					<input type="text" name="ifl1" class="rename hidden">
-					<input type="button" value="Location 2" name="fl2" class="btn">
-					<input type="text" name="ifl2" class="rename hidden">
-					<input type="button" value="Location 3" name="fl3" class="btn">
-					<input type="text" name="ifl3" class="rename hidden">
-					<input type="button" value="Location 4" name="fl4" class="btn">
-					<input type="text" name="ifl4" class="rename hidden">
-					<input type="button" value="Location 5" name="fl5" class="btn">
-					<input type="text" name="ifl5" class="rename hidden">
-					<input type="button" value="Location 6" name="fl6" class="btn">
-					<input type="text" name="ifl6" class="rename hidden">
-				</div>
-				<div class="row">
-					<label for="distance__friend">Distance:</label>
-					<input type="number" id="distance__friend" class="input" min="1">
-				</div>
-				<div class="row">
-					<label for="azimuth__friend">Azimuth:</label>
-					<input type="number" id="azimuth__friend" class="input" min="0" max="359">
-				</div>
-			</fieldset>
-			<section id="result">
-				<h3>Result Vector</h3>
-				<span>Distance:</span>
-				<h1 id="distance__result">0.0</h1>
-				<span>Azimuth:</span>
-				<h1 id="azimuth__result">0.0</h1>
-			</section>
-			<section id="relocate">
-				<h3>Old Spot</h3>
-				<form>
+			<div class="col">
+				<section id="target" class="flex">
+					<h3>Target Positions</h3>
+					<div class="btn-list">
+						<input type="button" value="Location 1" name="tl1" class="btn selected">
+						<input type="text" name="itl1" class="rename hidden">
+						<input type="button" value="Location 2" name="tl2" class="btn">
+						<input type="text" name="itl2" class="rename hidden">
+						<input type="button" value="Location 3" name="tl3" class="btn">
+						<input type="text" name="itl3" class="rename hidden">
+						<input type="button" value="Location 4" name="tl4" class="btn">
+						<input type="text" name="itl4" class="rename hidden">
+						<input type="button" value="Location 5" name="tl5" class="btn">
+						<input type="text" name="itl5" class="rename hidden">
+						<input type="button" value="Location 6" name="tl6" class="btn">
+						<input type="text" name="itl6" class="rename hidden">
+					</div>
+					<div class="row">
+						<label for="distance__target">Distance:</label>
+						<input type="number" id="distance__target" class="input" min="1">
+					</div>
+					<div class="row">
+						<label for="azimuth__target">Azimuth:</label>
+						<input type="number" id="azimuth__target" class="input" min="0" max="359">
+					</div>
+				</section>
+				<section id="friend" class="flex">
+					<h3>Friendly Positions</h3>
+					<div class="btn-list">
+						<input type="button" value="Location 1" name="fl1" class="btn selected">
+						<input type="text" name="ifl1" class="rename hidden">
+						<input type="button" value="Location 2" name="fl2" class="btn">
+						<input type="text" name="ifl2" class="rename hidden">
+						<input type="button" value="Location 3" name="fl3" class="btn">
+						<input type="text" name="ifl3" class="rename hidden">
+						<input type="button" value="Location 4" name="fl4" class="btn">
+						<input type="text" name="ifl4" class="rename hidden">
+						<input type="button" value="Location 5" name="fl5" class="btn">
+						<input type="text" name="ifl5" class="rename hidden">
+						<input type="button" value="Location 6" name="fl6" class="btn">
+						<input type="text" name="ifl6" class="rename hidden">
+					</div>
+					<div class="row">
+						<label for="distance__friend">Distance:</label>
+						<input type="number" id="distance__friend" class="input" min="1">
+					</div>
+					<div class="row">
+						<label for="azimuth__friend">Azimuth:</label>
+						<input type="number" id="azimuth__friend" class="input" min="0" max="359">
+					</div>
+				</section>
+			</div>
+			<div class="col">
+				<section id="result" class="flex">
+					<h3>Result Vector</h3>
+					<label>Distance:</label>
+					<h1 id="distance__result">0.0</h1>
+					<label>Azimuth:</label>
+					<h1 id="azimuth__result">0.0</h1>
+				</section>
+				<section id="relocate" class="flex">
+					<h3>Old Spot</h3>
 					<div class="row">
 						<label for="distance__old">Distance:</label>
 						<input type="number" id="distance__old" min="0">
@@ -84,15 +94,18 @@
 						<label for="azimuth__old">Azimuth:</label>
 						<input type="number" id="azimuth__old" min="0" max="359">
 					</div>
-				</form>
-				<input type="button" value="Relocate" class="btn confirm" data-callback="relocate">
-			</section>
-			<section id="utils">
-				<input type="button" value="10:00" class="btn" id="timer">
-				<input type="button" value="Reset All" class="btn confirm" data-callback="reset">
-				<input type="button" value="Location Data" class="btn" id="debug">
-			</section>
+					<input type="button" value="Relocate" class="btn confirm" data-callback="relocate">
+				</section>
+				<section id="utils" class="flex">
+					<input type="button" value="00:10" class="btn" id="timer">
+					<input type="button" value="Reset All" class="btn confirm" data-callback="reset">
+					<input type="button" value="Location Data" class="btn hidden" id="debug">
+				</section>
+			</div>
 		</div>
+		<footer>
+			<span><a href="https://github.com/geosheehan/WebArtilleryStrike">[MAG] medium_fry</a></span>
+		</footer>
 		<script type="text/javascript" src="js/main.js"></script>
 	</body>
 </html>
