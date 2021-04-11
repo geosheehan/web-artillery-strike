@@ -1,12 +1,6 @@
-
-
-
-// document.addEventListener('keydown',)
-
 let LOCATION_DATA = {};
 let TIMER_ID = 0;
 
-document.getElementById('debug').addEventListener('click', () => console.log(LOCATION_DATA))
 /******************************************************************************
  * 1. Classes
  *****************************************************************************/
@@ -190,13 +184,11 @@ function toggleTimer() {
 }
 
 function tick(clock) {
-   console.log(clock);
    let [min, sec] = clock.value.split(':');
    let time = ((Number(min) * 60) + Number(sec));
 
    if (time > 0) {
       time -= 1;
-      console.log(time);
       min = String(~~(time / 60)).padStart(2, '0');
       sec = String(~~time % 60).padStart(2, '0');
       clock.value = `${min}:${sec}`;
