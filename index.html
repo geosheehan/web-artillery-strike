@@ -36,85 +36,88 @@
 				<div class="grid">
 					<section id="result">
 						<h3>Result Vector</h3>
-						<div class="row">
-							<div class="col s6 m12">
-								<span>Distance:</span>
-								<h1 id="distance__result">0.0</h1>
-							</div>
-							<div class="col s6 m12">
-								<span>Azimuth:</span>
-								<h1 id="azimuth__result">0.0</h1>
+						<div class="container">
+							<div class="row">
+								<div class="col s6 m12">
+									<span>Distance:</span>
+									<h1 id="distance__result">0.0</h1>
+								</div>
+								<div class="col s6 m12">
+									<span>Azimuth:</span>
+									<h1 id="azimuth__result">0.0</h1>
+								</div>
 							</div>
 						</div>
 					</section>
 					<section id="target">
-					<h3>Target Positions</h3>
-						<div class="btn-list">
-							<input type="button" value="Location 1" name="tl1" class="btn-flat selected">
-							<input type="text" name="itl1" class="rename hide">
-							<input type="button" value="Location 2" name="tl2" class="btn-flat">
-							<input type="text" name="itl2" class="rename hide">
-							<input type="button" value="Location 3" name="tl3" class="btn-flat">
-							<input type="text" name="itl3" class="rename hide">
-							<input type="button" value="Location 4" name="tl4" class="btn-flat">
-							<input type="text" name="itl4" class="rename hide">
-							<input type="button" value="Location 5" name="tl5" class="btn-flat">
-							<input type="text" name="itl5" class="rename hide hide">
-							<input type="button" value="Location 6" name="tl6" class="btn-flat">
-							<input type="text" name="itl6" class="rename hide hide">
+						<h3>Target Positions</h3>
+						<div class="container">
+							<div class="btn-list">
+								<input type="button" value="Location 1" name="tl1" class="btn-flat selected">
+								<input type="text" name="itl1" class="rename">
+								<input type="button" value="Location 2" name="tl2" class="btn-flat">
+								<input type="text" name="itl2" class="rename hide">
+								<input type="button" value="Location 3" name="tl3" class="btn-flat">
+								<input type="text" name="itl3" class="rename hide">
+								<input type="button" value="Location 4" name="tl4" class="btn-flat">
+								<input type="text" name="itl4" class="rename hide">
+								<input type="button" value="Location 5" name="tl5" class="btn-flat">
+								<input type="text" name="itl5" class="rename hide hide">
+								<input type="button" value="Location 6" name="tl6" class="btn-flat">
+								<input type="text" name="itl6" class="rename hide hide">
+							</div>
+							<label for="distance__target">Distance:</label>
+							<input type="number" id="distance__target" class="input" min="1">
+							<label for="azimuth__target">Azimuth:</label>
+							<input type="number" id="azimuth__target" class="input" min="0" max="359">
 						</div>
-						<label for="distance__target">Distance:</label>
-						<input type="number" id="distance__target" class="input" min="1">
-						<label for="azimuth__target">Azimuth:</label>
-						<input type="number" id="azimuth__target" class="input" min="0" max="359">
 					</section>
 					<section id="friend">
 						<h3>Friendly Positions</h3>
-						<div class="btn-list">
-							<input type="button" value="Location 1" name="fl1" class="btn-flat selected">
-							<input type="text" name="ifl1" class="rename hide">
-							<input type="button" value="Location 2" name="fl2" class="btn-flat">
-							<input type="text" name="ifl2" class="rename hide">
-							<input type="button" value="Location 3" name="fl3" class="btn-flat">
-							<input type="text" name="ifl3" class="rename hide">
-							<input type="button" value="Location 4" name="fl4" class="btn-flat">
-							<input type="text" name="ifl4" class="rename hide">
-							<input type="button" value="Location 5" name="fl5" class="btn-flat">
-							<input type="text" name="ifl5" class="rename hide">
-							<input type="button" value="Location 6" name="fl6" class="btn-flat">
-							<input type="text" name="ifl6" class="rename hide">
-						</div>
-						<div class="row">
+						<div class="container">
+							<div class="btn-list">
+								<input type="button" value="Location 1" name="fl1" class="btn-flat selected">
+								<input type="text" name="ifl1" class="rename hide">
+								<input type="button" value="Location 2" name="fl2" class="btn-flat">
+								<input type="text" name="ifl2" class="rename hide">
+								<input type="button" value="Location 3" name="fl3" class="btn-flat">
+								<input type="text" name="ifl3" class="rename hide">
+								<input type="button" value="Location 4" name="fl4" class="btn-flat">
+								<input type="text" name="ifl4" class="rename hide">
+								<input type="button" value="Location 5" name="fl5" class="btn-flat">
+								<input type="text" name="ifl5" class="rename hide">
+								<input type="button" value="Location 6" name="fl6" class="btn-flat">
+								<input type="text" name="ifl6" class="rename hide">
+							</div>
 							<label for="distance__friend">Distance:</label>
 							<input type="number" id="distance__friend" class="input" min="1">
-						</div>
-						<div class="row">
 							<label for="azimuth__friend">Azimuth:</label>
 							<input type="number" id="azimuth__friend" class="input" min="0" max="359">
 						</div>
 					</section>
 					<section id="relocate">
 						<h3>Old Spot</h3>
-						<div class="row">
+						<div class="container">
 							<label for="distance__old">Distance:</label>
 							<input type="number" id="distance__old" min="0">
-						</div>
-						<div class="row">
 							<label for="azimuth__old">Azimuth:</label>
 							<input type="number" id="azimuth__old" min="0" max="359">
+							<input type="button" value="Relocate" class="btn-flat confirm" data-callback="relocate">
 						</div>
-						<input type="button" value="Relocate" class="btn-flat confirm" data-callback="relocate">
 					</section>
 					<section id="utils">
-						<h3></h3>
-						<input type="button" value="10:00" class="btn-flat" id="timer">
-						<input type="button" value="Reset All" class="btn-flat confirm" data-callback="reset">
+						<div class="container">
+							<input type="button" value="10:00" class="btn-flat" id="timer">
+							<input type="button" value="Reset All" class="btn-flat confirm" data-callback="reset">
+						</div>
 					</section>
 				</div>
 			</div>
 		</main>
 		<footer class="page-footer">
-			<span><a href="https://github.com/geosheehan/WebArtilleryStrike">[MAG] medium_fry</a></span>
+			<div class="valign-wrapper">
+				<a href="https://github.com/geosheehan/WebArtilleryStrike">[MAG] medium_fry</a>
+			</div>
 		</footer>
 		<script type="text/javascript" src="js/main.js"></script>
 	</body>

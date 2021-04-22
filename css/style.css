@@ -1,13 +1,10 @@
-/* .neutral {
+.neutral {
    --selected: #e77c48;
    --selected-font: black;
    --primary: #333333;
    --secondary: #575757;
    --tertiary: #646464;
    --background: #7e7e7e;
-} */
-:root {
-   --primary: #9e9e9e;
 }
 
 html {
@@ -18,18 +15,54 @@ body {
    display: flex;
    min-height: 100vh;
    flex-direction: column;
+   background: var(--background);
+   color: white;
 }
 
 main {
    flex: 1 0 auto;
 }
 
+header {
+   background: var(--primary);
+}
+
 section {
    background: var(--primary);
 }
 
+input {
+   color: white !important;
+   background: var(--tertiary) !important;
+}
+
+input[type="text"] {
+   margin: 0 !important;
+   border: none !important;
+   background: var(--selected) !important;
+   border-radius: 2px !important;
+   min-height: 3.6rem;
+   text-align: center;
+   text-transform: uppercase;
+   font-size: 1.4rem !important;
+}
+
 .selected {
-   background-color: tomato !important;
+   color: var(--selected-font) !important;
+   background-color: var(--selected) !important;
+}
+
+.rename {
+   background: var(--selected);
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after,
+.hamburger.is-active .hamburger-inner,
+.hamburger.is-active .hamburger-inner::before,
+.hamburger.is-active .hamburger-inner::after {
+   background: white;
 }
 
 .btn-list {
@@ -40,7 +73,12 @@ section {
 }
 
 .btn-flat {
-   background: #26a69a;
+   color: white;
+   background: var(--secondary);
+}
+
+.btn-flat:focus {
+   background: var(--secondary);
 }
 
 .grid {
@@ -49,20 +87,6 @@ section {
    grid-template-columns: repeat(2, minmax(0, 1fr));
    gap: 1rem;
 }
-
-.hamburger {
-   display: inline-block;
-   cursor: pointer;
-}
-
-.bar {
-   width: 35px;
-   height: 5px;
-   background-color: #333;
-   margin: 6px 0;
-   transition: 0.4s;
-}
-
 
 #target {
    order: -1;
@@ -86,6 +110,10 @@ section {
 
    .grid {
       display: block;
+   }
+
+   #utils {
+      grid-column-start: unset;
    }
 
 }

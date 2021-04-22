@@ -158,7 +158,4 @@ label {
       display: none;
    }
 
-   #results {
-
-   }
 }
