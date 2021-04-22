@@ -96,6 +96,10 @@ function init() {
    const timer = document.getElementById('timer');
    timer.addEventListener('click', toggleTimer);
 
+   const hamburger = document.querySelector('.hamburger');
+   hamburger.addEventListener("click", function () {
+      this.classList.toggle("is-active");
+   }, false);
 }
 
 function initButtonList(btn_list) {
@@ -155,18 +159,18 @@ function selectLocation(click) {
 }
 
 function renameButton() {
-   this.classList.add('hidden');
+   this.classList.add('hide');
    const input = document.querySelector(`input[name="i${this.name}"]`);
    input.value = this.value;
-   input.classList.remove('hidden');
+   input.classList.remove('hide');
    input.select();
 }
 
 function applyRename() {
-   this.classList.add('hidden');
+   this.classList.add('hide');
    const button = document.querySelector(`input[name="${this.name.slice(1)}"]`);
    button.value = this.value;
-   button.classList.remove('hidden');
+   button.classList.remove('hide');
 }
 
 function toggleTimer() {
