@@ -29,7 +29,7 @@ section {
 }
 
 .selected {
-   background: tomato;
+   background-color: tomato !important;
 }
 
 .btn-list {
@@ -37,6 +37,10 @@ section {
    grid-template-rows: repeat(2, 3.6rem);
    grid-template-columns: repeat(3, minmax(0, 1fr));
    gap: 0.6rem;
+}
+
+.btn-flat {
+   background: #26a69a;
 }
 
 .grid {

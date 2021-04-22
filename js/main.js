@@ -77,7 +77,7 @@ function init() {
    const ids = ['target', 'friend'];
 
    for (let id of ids) {
-      const btn_list = document.querySelectorAll(`#${id} .btn`);
+      const btn_list = document.querySelectorAll(`#${id} .btn-flat`);
       initButtonList(btn_list);
 
       const inputs = document.querySelectorAll(`#${id} .input`);
@@ -87,7 +87,7 @@ function init() {
       initRenameButtons(btn_rename);
    }
 
-   const confirms = document.querySelectorAll('.btn.confirm');
+   const confirms = document.querySelectorAll('.btn-flat.confirm');
    initConfirmationButtons(confirms);
 
    const themes = document.querySelectorAll('.theme');
@@ -144,10 +144,11 @@ function onTextBoxUpdate(event) {
    updateResults();
 }
 
-function selectLocation(click) {
+function selectLocation() {
+   console.log()
    let parent = this.parentElement;
    if (parent) {
-      let children = parent.querySelectorAll('.btn');
+      let children = parent.querySelectorAll('.btn-flat');
       children.forEach(element => {
          element.classList.remove('selected');
       });
@@ -278,7 +279,7 @@ function getThemes() {
 
 function getSelectedButtons() {
    const thing = ['friend', 'target'].map((id) => {
-      return document.querySelector(`#${id} .btn.selected`);
+      return document.querySelector(`#${id} .btn-flat.selected`);
    });
    return thing;
 }
@@ -312,7 +313,7 @@ function saveLocation(changed) {
    let [attribute, team] = changed.target.id.split('__');
    let value = changed.target.value;
 
-   let selected = document.querySelector(`#${team} .btn.selected`);
+   let selected = document.querySelector(`#${team} .btn-flat.selected`);
    if (selected) {
       LOCATION_DATA[selected.name][attribute] = Number(value);
    }
