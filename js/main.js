@@ -85,6 +85,10 @@ function init() {
 
       const btn_rename = document.querySelectorAll(`#${id} input[type="text"]`);
       initRenameButtons(btn_rename);
+
+      const number_box = document.querySelectorAll(`#${id} input[type="number"]`);
+      number_box.forEach(element => element.addEventListener('focus', () => element.select()))
+
    }
 
    const confirms = document.querySelectorAll('.btn-flat.confirm');
