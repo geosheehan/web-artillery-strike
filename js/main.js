@@ -91,7 +91,7 @@ function init() {
 
    }
 
-   const confirms = document.querySelectorAll('.btn-flat.confirm');
+   const confirms = document.querySelectorAll('.confirm');
    initConfirmationButtons(confirms);
 
    const themes = document.querySelectorAll('.theme');
@@ -237,8 +237,8 @@ function relocate() {
    const newLocation = ['distance', 'azimuth'].reduce(
       (location, element) => {
          const input = document.querySelector(`#${element}__old`);
-         input.value = '';
          location[element] = input.value;
+         input.value = '';
          return location;
       }, new Location());
 
