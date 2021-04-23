@@ -111,6 +111,7 @@ function initButtonList(btn_list) {
       element.addEventListener('click', selectLocation);
       element.addEventListener('dblclick', renameButton);
       LOCATION_DATA[element.name] = new Location();
+      element.tabindex = '0';
    });
    loadLocation(btn_list[0]);
 }
@@ -265,11 +266,13 @@ function relocate() {
 function confirmClick() {
    if (Array.from(this.classList).includes('selected')) {
       this.classList.remove('selected');
+      this.value = this.dataset.value;
       const callback = window[this.dataset.callback];
       if (typeof callback === 'function') callback.apply(this);
    }
    else {
       this.classList.add('selected');
+      this.value = 'Confirm?'
    }
 }
 
