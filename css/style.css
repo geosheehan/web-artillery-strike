@@ -23,12 +23,13 @@ main {
    flex: 1 0 auto;
 }
 
-header {
-   background: var(--primary);
+header, footer, section {
+   background: var(--primary) !important;
 }
 
-section {
-   background: var(--primary);
+footer a {
+   color: white;
+   text-decoration: none;
 }
 
 label {
@@ -59,6 +60,10 @@ input[type="text"] {
 
 .rename {
    background: var(--selected);
+}
+
+.hamburger:focus {
+   background-color: transparent !important;
 }
 
 .hamburger-inner,
@@ -106,6 +111,10 @@ input[type="text"] {
 #result span {
    color: white;
    font-size: 1.2rem;
+}
+
+#titleBar h1 {
+   display: inline;
 }
 
 @media screen and (max-width: 900px) {

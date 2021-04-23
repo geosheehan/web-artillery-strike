@@ -1,5 +1,6 @@
 let LOCATION_DATA = {};
 let TIMER_ID = 0;
+let SIDENAV = null;
 
 /******************************************************************************
  * 1. Classes
@@ -101,9 +102,10 @@ function init() {
    timer.addEventListener('click', toggleTimer);
 
    const hamburger = document.querySelector('.hamburger');
-   hamburger.addEventListener("click", function () {
-      this.classList.toggle("is-active");
-   }, false);
+   hamburger.addEventListener('click', function () {
+      SIDENAV.open();
+   });
+   // hamburger.addEventListener(,)
 }
 
 function initButtonList(btn_list) {
@@ -390,5 +392,11 @@ function calcVector(friend, target) {
    return new Location(FT.length, Angle.toDegrees(NFT.radians));
 
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+   var elems = document.querySelectorAll('.sidenav');
+   SIDENAV = M.Sidenav.init(elems, { draggable: false, preventScrolling: false })[0];
+   console.log(SIDENAV);
+});
 
 init();
