@@ -111,7 +111,6 @@ function initButtonList(btn_list) {
       element.addEventListener('click', selectLocation);
       element.addEventListener('dblclick', renameButton);
       LOCATION_DATA[element.name] = new Location();
-      element.tabindex = '0';
    });
    loadLocation(btn_list[0]);
 }
