@@ -124,7 +124,10 @@ function initInputList(inputs) {
 function initConfirmationButtons(btn_list) {
    btn_list.forEach(element => {
       element.addEventListener('click', confirmClick);
-      element.addEventListener('blur', () => element.classList.remove('selected'));
+      element.addEventListener('blur', () => {
+         element.classList.remove('selected');
+         element.value = element.dataset.value;
+      });
    });
 }
 
