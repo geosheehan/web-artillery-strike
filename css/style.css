@@ -53,6 +53,12 @@ input[type="text"] {
    font-size: 1.4rem !important;
 }
 
+select {
+   display: inline;
+   color: white;
+   background: var(--tertiary);
+}
+
 .selected {
    color: var(--selected-font) !important;
    background-color: var(--selected) !important;
@@ -115,6 +121,10 @@ input[type="text"] {
 
 #titleBar h1 {
    display: inline;
+}
+
+#slide-out {
+   background: var(--primary);
 }
 
 @media screen and (max-width: 900px) {
