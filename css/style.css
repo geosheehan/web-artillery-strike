@@ -7,6 +7,24 @@
    --background: #7e7e7e;
 }
 
+.colonial {
+   --selected: #e77c48;
+   --selected-font: black;
+   --primary: #1c3518;
+   --secondary: #4c5a3e;
+   --tertiary: #879D7B;
+   --background: #dae4ce;
+}
+
+.warden {
+   --selected: #e77c48;
+   --selected-font: black;
+   --primary: #263e53;
+   --secondary: #245582;
+   --tertiary: #4c66a8;
+   --background: #dbd9d8;
+}
+
 html {
    font-size: 62.5%;
 }
@@ -58,6 +76,10 @@ select {
 .selected {
    color: var(--selected-font) !important;
    background-color: var(--selected) !important;
+}
+
+.confirm {
+   min-width: 10rem !important;
 }
 
 .rename {
@@ -159,4 +181,7 @@ select {
       grid-column-start: unset;
    }
 
+   #result h1 {
+      padding-left: 0;
+   }
 }

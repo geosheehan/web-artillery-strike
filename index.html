@@ -37,20 +37,20 @@
 				<li>Coming Soon</li>
 				<li><h2>Preferences</h2></li>
 				<li>
-					<select name="" id="">
+					<select name="" id="theme">
 						<option selected value="neutral">Theme</option>
 						<option value="colonial">Colonial</option>
 						<option value="warden">Warden</option>
 					</select>
 				</li>
 				<li>
-					<select name="" id="">
+					<select name="" id="mode">
 						<option selected value="-1">Artillery Mode</option>
 						<option value="45,80,0.5">Mortar</option>
 						<option value="100,250,5">Field Artillery </option>
 						<option value="100,300,8">Light Artillery</option>
-						<option value="100,300,8">Heavy Artillery (Warden)</option>
-						<option value="200,350,6">Heavy Artillery (Colonial)</option>
+						<option value="100,300,8">(Warden) Heavy Artillery</option>
+						<option value="200,350,6">(Colonial) Heavy Artillery</option>
 					</select>
 				</li>
 				<li>
@@ -69,7 +69,7 @@
 				</li>
 				<li>
 					<div class="switch">
-						<label><input type="checkbox"><span class="lever"></span>
+						<label><input checked type="checkbox"><span class="lever"></span>
 							Restrict Tabbing
 						</label>
 					</div>
@@ -119,7 +119,7 @@
 									<label for="distance__target">Distance:</label>
 								</div>
 								<div class="col s10">
-									<input type="number" id="distance__target" class="input" min="1">
+									<input type="number" id="distance__target" class="input" min="1" max="1000">
 								</div>
 							</div>
 							<div class="row">
@@ -155,7 +155,7 @@
 									<label for="distance__friend">Distance:</label>
 								</div>
 								<div class="col s10">
-									<input type="number" id="distance__friend" class="input" min="1">
+									<input type="number" id="distance__friend" class="input" min="1" max="1000">
 								</div>
 							</div>
 							<div class="row">
@@ -177,7 +177,7 @@
 									<label for="distance__old">Distance:</label>
 								</div>
 								<div class="col s10">
-									<input type="number" id="distance__old" min="0">
+									<input type="number" id="distance__old" min="1" max="1000">
 								</div>
 							</div>
 							<div class="row">
@@ -195,7 +195,7 @@
 					</div>
 
 					<div class="card" id="utils">
-						<div class="card-content">
+						<div class="card-content right-align">
 							<input type="button" value="10:00" class="btn-flat" id="timer">
 							<input type="button" value="Reset All" class="btn-flat confirm" data-callback="reset" data-value="Reset All">
 						</div>

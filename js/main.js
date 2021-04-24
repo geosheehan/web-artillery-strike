@@ -95,8 +95,8 @@ function init() {
    const confirms = document.querySelectorAll('.confirm');
    initConfirmationButtons(confirms);
 
-   const themes = document.querySelectorAll('.theme');
-   initColorSchemes(themes);
+   const themeSelect = document.getElementById('theme');
+   initColorSchemes(themeSelect);
 
    const timer = document.getElementById('timer');
    timer.addEventListener('click', toggleTimer);
@@ -105,7 +105,6 @@ function init() {
    hamburger.addEventListener('click', function () {
       SIDENAV.open();
    });
-   // hamburger.addEventListener(,)
 }
 
 function initButtonList(btn_list) {
@@ -139,10 +138,8 @@ function initRenameButtons(btn_list) {
    });
 }
 
-function initColorSchemes(btn_list) {
-   btn_list.forEach(element => {
-      element.addEventListener('click', updateTheme);
-   });
+function initColorSchemes(themeSelect) {
+   themeSelect.addEventListener('change', updateTheme);
 }
 
 /******************************************************************************
@@ -212,10 +209,10 @@ function tick(clock) {
 }
 
 function updateTheme() {
-   const remove = getThemes();
+   const remove = Array.from(this.querySelectorAll('option')).map(option => option.value);
    const theme = this.value;
-
    const body = document.querySelector('body');
+
    body.classList.remove(...remove)
    body.classList.add(theme);
 }
@@ -388,25 +385,26 @@ function calcVector(friend, target) {
    );
    NFT.validate();
 
-   return new Location(FT.length, Angle.toDegrees(NFT.radians));
+   return new Location(FT.length, NFT.degrees);
 
 }
 
 window.addEventListener('keyup', (e) => {
+   e.preventDefault();
+
    let btn_list = null;
    let name = ''
 
-   if (e.altKey) {
+   if (e.ctrlKey) {
       btn_list = document.querySelectorAll('#target input[type="button"]');
       name = 'tl';
    }
-   if (e.ctrlKey) {
+   if (e.altKey) {
       btn_list = document.querySelectorAll('#friend input[type="button"]');
       name = 'fl';
    }
 
    if (btn_list === null) return;
-   e.preventDefault();
    btn_list = Array.from(btn_list);
 
    if (e.code.includes('Numpad')) name += e.code[e.code.length - 1];
