@@ -145,6 +145,7 @@ select {
    font-size: 6rem;
    margin: 0.5rem;
    padding-left: 5rem;
+   max-height: 6.6rem;
 }
 
 #titleBar h1 {

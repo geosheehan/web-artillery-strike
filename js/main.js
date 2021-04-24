@@ -2,6 +2,13 @@ let LOCATION_DATA = {};
 let TIMER_ID = 0;
 let SIDENAV = null;
 
+let OPTIONS = {
+   range: false,
+   increments: false,
+   tabbing: true
+};
+
+
 /******************************************************************************
  * 1. Classes
  *****************************************************************************/
@@ -98,13 +105,17 @@ function init() {
    const themeSelect = document.getElementById('theme');
    initColorSchemes(themeSelect);
 
+   const modeSelect = document.getElementById('mode');
+   initArtilleryMode(modeSelect);
+
+   const increments = document.getElementById('increments');
+   increments.addEventListener('click', toggleIncrements);
+
    const timer = document.getElementById('timer');
    timer.addEventListener('click', toggleTimer);
 
    const hamburger = document.querySelector('.hamburger');
-   hamburger.addEventListener('click', function () {
-      SIDENAV.open();
-   });
+   hamburger.addEventListener('click', () => SIDENAV.open());
 }
 
 function initButtonList(btn_list) {
@@ -140,6 +151,10 @@ function initRenameButtons(btn_list) {
 
 function initColorSchemes(themeSelect) {
    themeSelect.addEventListener('change', updateTheme);
+}
+
+function initArtilleryMode(modeSelect) {
+   modeSelect.addEventListener('change', updateMode);
 }
 
 /******************************************************************************
@@ -215,6 +230,27 @@ function updateTheme() {
 
    body.classList.remove(...remove)
    body.classList.add(theme);
+}
+
+function updateMode() {
+   const [min, max, step] = this.value.split(',');
+   const toggles = document.querySelectorAll('.toggle');
+   if (min < 0) {
+      // Turn off switches and disable or hide
+      toggles.forEach(elem => elem.setAttribute('disabled', 'true'));
+   }
+   else {
+      toggles.forEach(elem => {
+         elem.removeAttribute('disabled');
+      });
+   }
+   updateResults();
+}
+
+function toggleIncrements() {
+   console.log(this.checked);
+   const incrementText = document.querySelector('#result small');
+   this.checked ? incrementText.classList.remove('hide') : incrementText.classList.add('hide');
 }
 
 /* Call backs stored in HTML */
@@ -296,12 +332,42 @@ function getSelectedLocations() {
    return buttons.map((button) => LOCATION_DATA[button.name]);
 }
 
+function nearestIncrement(val, min, max, incr) {
+   if (min < 0) return '';
+   if (val < min) return `(${min.toFixed(1)})`;
+   if (max < val) return `(${max.toFixed(1)})`;
+
+   const fn = (x) => incr * x + min;
+   let x = (+val.toFixed(1) - min) / incr;
+
+   if (x % 1 === 0) {
+      const match = fn(x).toFixed(1);
+      return `(${match}, ${match})`;
+   }
+
+   x = Math.trunc(x);
+   return `(${fn(x).toFixed(1)}, ${fn(x + 1).toFixed(1)})`;
+}
+
 function updateResults() {
    let [friend, target] = getSelectedLocations();
 
    const result = calcVector(friend, target);
 
-   document.querySelector('#distance__result').innerText = result.distance.toFixed(1);
+   // What are the min, max and incr of the gun?
+   const [min, max, incr] = document.querySelector('#mode').value.split(',').map(parseFloat);
+
+   const HTMLresult = document.querySelector('#distance__result');
+   const HTMLincr = HTMLresult.querySelector('small');
+
+   console.log({ min, max, incr });
+   let debug = nearestIncrement(result.distance, min, max, incr);
+   console.log({ debug });
+   HTMLincr.innerText = debug;
+
+   HTMLresult.innerHTML = `
+      ${result.distance.toFixed(1)} <small class="${Array.from(HTMLincr.classList).join(' ')}">${HTMLincr.innerText}</small>
+   `;
    document.querySelector('#azimuth__result').innerText = result.azimuth.toFixed(1);
 }
 

@@ -55,21 +55,21 @@
 				</li>
 				<li>
 					<div class="switch">
-						<label><input disabled type="checkbox"><span class="lever"></span>
+						<label><input id="range" disabled type="checkbox" class="toggle"><span class="lever"></span>
 							Show Out of Range
 						</label>
 					</div>
 				</li>
 				<li>
 					<div class="switch">
-						<label><input disabled type="checkbox"><span class="lever"></span>
+						<label><input id="increments" disabled type="checkbox" class="toggle"><span class="lever"></span>
 							Show Nearest Increments
 						</label>
 					</div>
 				</li>
 				<li>
 					<div class="switch">
-						<label><input checked type="checkbox"><span class="lever"></span>
+						<label><input id="restrictTabs" checked type="checkbox" ><span class="lever"></span>
 							Restrict Tabbing
 						</label>
 					</div>
@@ -87,7 +87,7 @@
 							<div class="row">
 								<div class="col s6 m12">
 									<span>Distance:</span>
-									<h1 id="distance__result">0.0</h1>
+									<h1 id="distance__result">0.0 <small class="hide">(0.0, 0.0)</small></h1>
 								</div>
 								<div class="col s6 m12">
 									<span>Azimuth:</span>
