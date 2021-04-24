@@ -102,6 +102,10 @@ select {
    padding: 5vh 0;
 }
 
+.card-title {
+   font-weight: 500 !important;
+}
+
 #target {
    order: -1;
 }
@@ -110,7 +114,7 @@ select {
    grid-column-start: 2;
 }
 
-label {
+#result .row span, label {
    color: white;
    font-size: 1.4rem;
 }

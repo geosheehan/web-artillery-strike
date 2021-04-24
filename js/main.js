@@ -154,7 +154,6 @@ function onTextBoxUpdate(event) {
 }
 
 function selectLocation() {
-   console.log()
    let parent = this.parentElement;
    if (parent) {
       let children = parent.querySelectorAll('.btn-flat');
@@ -393,10 +392,33 @@ function calcVector(friend, target) {
 
 }
 
+window.addEventListener('keyup', (e) => {
+   let btn_list = null;
+   let name = ''
+
+   if (e.altKey) {
+      btn_list = document.querySelectorAll('#target input[type="button"]');
+      name = 'tl';
+   }
+   if (e.ctrlKey) {
+      btn_list = document.querySelectorAll('#friend input[type="button"]');
+      name = 'fl';
+   }
+
+   if (btn_list === null) return;
+   e.preventDefault();
+   btn_list = Array.from(btn_list);
+
+   if (e.code.includes('Numpad')) name += e.code[e.code.length - 1];
+
+   const found = btn_list.find(btn => btn.name === name);
+   if (found) found.click();
+
+});
+
 document.addEventListener('DOMContentLoaded', function () {
    var elems = document.querySelectorAll('.sidenav');
    SIDENAV = M.Sidenav.init(elems, { draggable: false, preventScrolling: false })[0];
-   console.log(SIDENAV);
 });
 
 init();
