@@ -38,7 +38,14 @@
 				<li><h2>Preferences</h2></li>
 				<li>
 					<select name="" id="">
-						<option value="-1">Artillery Mode</option>
+						<option selected value="neutral">Theme</option>
+						<option value="colonial">Colonial</option>
+						<option value="warden">Warden</option>
+					</select>
+				</li>
+				<li>
+					<select name="" id="">
+						<option selected value="-1">Artillery Mode</option>
 						<option value="45,80,0.5">Mortar</option>
 						<option value="100,250,5">Field Artillery </option>
 						<option value="100,300,8">Light Artillery</option>
@@ -60,30 +67,16 @@
 						</label>
 					</div>
 				</li>
-				<!-- <li>
-					<div class="user-view">
-						<div class="background">
-							<img src="images/office.jpg">
-						</div>
-					<a href="#user"><img class="circle" src="images/yuna.jpg"></a>
-					<a href="#name"><span class="white-text name">John Doe</span></a>
-					<a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
-					</div>
-				</li>
-				<li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
-				<li><a href="#!">Second Link</a></li>
-				<li><div class="divider"></div></li>
-				<li><a class="subheader">Subheader</a></li>
-				<li><a class="waves-effect" href="#!">Third Link With Waves</a></li> -->
 			</ul>
 
 		</header>
 		<main>
 			<div class="container">
 				<div class="display">
-					<section id="result">
-						<h3>Result Vector</h3>
-						<div class="container">
+
+					<div class="card" id="result">
+						<div class="card-content">
+							<span class="card-title">Result Vector</span>
 							<div class="row">
 								<div class="col s6 m12">
 									<span>Distance:</span>
@@ -95,10 +88,11 @@
 								</div>
 							</div>
 						</div>
-					</section>
-					<section id="target">
-						<h3>Target Positions</h3>
-						<div class="container">
+					</div>
+
+					<div class="card small" id="target">
+						<div class="card-content">
+							<span class="card-title">Target Positions</span>
 							<div class="btn-list">
 								<input type="button" value="Location 1" name="tl1" class="btn-flat selected">
 								<input type="text" name="itl1" class="rename hide">
@@ -130,10 +124,11 @@
 								</div>
 							</div>
 						</div>
-					</section>
-					<section id="friend">
-						<h3>Friendly Positions</h3>
-						<div class="container">
+					</div>
+
+					<div class="card small" id="friend">
+						<div class="card-content">
+							<span class="card-title">Friendly Positions</span>
 							<div class="btn-list">
 								<input type="button" value="Location 1" name="fl1" class="btn-flat selected">
 								<input type="text" name="ifl1" class="rename hide">
@@ -165,10 +160,11 @@
 								</div>
 							</div>
 						</div>
-					</section>
-					<section id="relocate">
-						<h3>Old Spot</h3>
-						<div class="container">
+					</div>
+
+					<div class="card small" id="relocate">
+						<div class="card-content">
+							<span class="card-title">Old Spot</span>
 							<div class="row">
 								<div class="col s2">
 									<label for="distance__old">Distance:</label>
@@ -189,20 +185,22 @@
 								<input type="button" value="Relocate" class="btn-flat confirm" data-callback="relocate" data-value="Relocate">
 							</div>
 						</div>
-					</section>
-					<section id="utils">
-						<div class="container">
+					</div>
+
+					<div class="card" id="utils">
+						<div class="card-content">
 							<input type="button" value="10:00" class="btn-flat" id="timer">
 							<input type="button" value="Reset All" class="btn-flat confirm" data-callback="reset" data-value="Reset All">
 						</div>
-					</section>
+					</div>
+
 				</div>
 			</div>
 		</main>
 		<footer class="page-footer">
-			<div class="center-align">
+			<h5 class="center-align">
 				<a href="https://github.com/geosheehan/WebArtilleryStrike">[MAG] medium_fry</a>
-			</div>
+			</h5>
 		</footer>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 		<script type="text/javascript" src="js/main.js"></script>

@@ -23,18 +23,14 @@ main {
    flex: 1 0 auto;
 }
 
-header, footer, section {
+header, footer, section, .card{
    background: var(--primary) !important;
+   margin: 0;
 }
 
 footer a {
    color: white;
    text-decoration: none;
-}
-
-label {
-   font-size: 1.2rem;
-   color: white;
 }
 
 input {
@@ -103,7 +99,7 @@ select {
    grid-template-rows: repeat(2, minmax(0, 1fr)) auto;
    grid-template-columns: repeat(2, minmax(0, 1fr));
    gap: 1rem;
-   padding: 10vh 0;
+   padding: 5vh 0;
 }
 
 #target {
@@ -114,9 +110,15 @@ select {
    grid-column-start: 2;
 }
 
-#result span {
+label {
    color: white;
-   font-size: 1.2rem;
+   font-size: 1.4rem;
+}
+
+#result h1 {
+   font-size: 6rem;
+   margin: 0.5rem;
+   padding-left: 5rem;
 }
 
 #titleBar h1 {
