@@ -2,13 +2,6 @@ let LOCATION_DATA = {};
 let TIMER_ID = 0;
 let SIDENAV = null;
 
-let OPTIONS = {
-   range: false,
-   increments: false,
-   tabbing: true
-};
-
-
 /******************************************************************************
  * 1. Classes
  *****************************************************************************/
@@ -84,6 +77,7 @@ class Angle {
 function init() {
    const ids = ['target', 'friend'];
 
+   LOCATION_DATA.results = new Location(0, 0);
    for (let id of ids) {
       const btn_list = document.querySelectorAll(`#${id} .btn-flat`);
       initButtonList(btn_list);
@@ -110,6 +104,9 @@ function init() {
 
    const increments = document.getElementById('increments');
    increments.addEventListener('click', toggleIncrements);
+
+   const rangeWarning = document.getElementById('range');
+   rangeWarning.addEventListener('click', toggleRangeWarning);
 
    const timer = document.getElementById('timer');
    timer.addEventListener('click', toggleTimer);
@@ -233,7 +230,7 @@ function updateTheme() {
 }
 
 function updateMode() {
-   const [min, max, step] = this.value.split(',');
+   const [min] = this.value.split(',');
    const toggles = document.querySelectorAll('.toggle');
    if (min < 0) {
       // Turn off switches and disable or hide
@@ -244,23 +241,26 @@ function updateMode() {
          elem.removeAttribute('disabled');
       });
    }
-   updateResults();
+   displayResults();
 }
 
 function toggleIncrements() {
-   console.log(this.checked);
    const incrementText = document.querySelector('#result small');
    this.checked ? incrementText.classList.remove('hide') : incrementText.classList.add('hide');
+}
+
+function toggleRangeWarning() {
+   displayResults();
 }
 
 /* Call backs stored in HTML */
 function reset() {
    for (let item in LOCATION_DATA) {
       const button = document.querySelector(`input[name="${item}"]`);
+      if (button === null) continue;
       button.value = `Location ${item[item.length - 1]}`;
       LOCATION_DATA[item] = new Location();
    }
-
    for (let id of ['distance', 'azimuth']) {
       const input = document.querySelector(`#${id}__old`);
       input.value = '';
@@ -349,26 +349,43 @@ function nearestIncrement(val, min, max, incr) {
    return `(${fn(x).toFixed(1)}, ${fn(x + 1).toFixed(1)})`;
 }
 
+function getMode() {
+   return document.querySelector('#mode').value.split(',').map(parseFloat);
+}
+
 function updateResults() {
    let [friend, target] = getSelectedLocations();
 
-   const result = calcVector(friend, target);
+   LOCATION_DATA.results = calcVector(friend, target);
 
+   displayResults();
+
+}
+
+function displayResults() {
    // What are the min, max and incr of the gun?
-   const [min, max, incr] = document.querySelector('#mode').value.split(',').map(parseFloat);
+   const [min, max, incr] = getMode();
+   const result = LOCATION_DATA.results;
 
-   const HTMLresult = document.querySelector('#distance__result');
-   const HTMLincr = HTMLresult.querySelector('small');
+   const distance = document.getElementById('distance__result');
+   const azimuth = document.getElementById('azimuth__result');
+   const rangeWarning = document.getElementById('range');
+   const incrementText = distance.querySelector('small');
 
-   console.log({ min, max, incr });
-   let debug = nearestIncrement(result.distance, min, max, incr);
-   console.log({ debug });
-   HTMLincr.innerText = debug;
+   incrementText.innerText = nearestIncrement(result.distance, min, max, incr);
 
-   HTMLresult.innerHTML = `
-      ${result.distance.toFixed(1)} <small class="${Array.from(HTMLincr.classList).join(' ')}">${HTMLincr.innerText}</small>
+   distance.innerHTML = `
+      ${result.distance.toFixed(1)} <small class="${Array.from(incrementText.classList).join(' ')}">${incrementText.innerText}</small>
    `;
-   document.querySelector('#azimuth__result').innerText = result.azimuth.toFixed(1);
+   azimuth.innerText = result.azimuth.toFixed(1);
+
+   if (rangeWarning.checked && (result.distance < min || max < result.distance)) {
+      [distance, azimuth].forEach(h1 => h1.classList.add('warning'));
+   }
+   else {
+      [distance, azimuth].forEach(h1 => h1.classList.remove('warning'));
+   }
+
 }
 
 function loadLocation(selected) {
