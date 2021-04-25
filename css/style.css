@@ -48,7 +48,7 @@ header, footer, section, .card{
 
 footer a {
    color: white;
-   text-decoration: none;
+   border-bottom: 1px solid white;
 }
 
 input {
@@ -78,6 +78,10 @@ select {
    background-color: var(--selected) !important;
 }
 
+.warning {
+   color: var(--selected) !important;
+}
+
 .confirm {
    min-width: 10rem !important;
 }
@@ -97,6 +101,14 @@ select {
 .hamburger.is-active .hamburger-inner::before,
 .hamburger.is-active .hamburger-inner::after {
    background: white;
+}
+
+.switch label input[type="checkbox"]:checked + .lever {
+    background-color: #b34a15;
+}
+
+.switch label input[type="checkbox"]:checked + .lever::after {
+    background-color: #e77c48;
 }
 
 .btn-list {
