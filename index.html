@@ -36,7 +36,6 @@
 			</div>
 
 			<ul id="slide-out" class="sidenav">
-				<li>Coming Soon</li>
 				<li><h2>Preferences</h2></li>
 				<li>
 					<select name="" id="theme">
@@ -69,13 +68,13 @@
 						</label>
 					</div>
 				</li>
-				<li>
+				<!-- <li>
 					<div class="switch">
 						<label><input id="restrictTabs" checked type="checkbox" ><span class="lever"></span>
-							Restrict Tabbing
+							Restrict Tabbing (Coming Soon!)
 						</label>
 					</div>
-				</li>
+				</li> -->
 			</ul>
 
 		</header>
@@ -121,7 +120,7 @@
 									<label for="distance__target">Distance:</label>
 								</div>
 								<div class="col s10">
-									<input type="number" id="distance__target" class="input" min="1" max="1000">
+									<input tabindex="1" type="number" id="distance__target" class="input" min="1" max="1000">
 								</div>
 							</div>
 							<div class="row">
@@ -129,7 +128,7 @@
 									<label for="azimuth__target">Azimuth:</label>
 								</div>
 								<div class="col s10">
-									<input type="number" id="azimuth__target" class="input" min="0" max="359">
+									<input tabindex="1" type="number" id="azimuth__target" class="input" min="0" max="359">
 								</div>
 							</div>
 						</div>
@@ -157,7 +156,7 @@
 									<label for="distance__friend">Distance:</label>
 								</div>
 								<div class="col s10">
-									<input type="number" id="distance__friend" class="input" min="1" max="1000">
+									<input tabindex="2" type="number" id="distance__friend" class="input" min="1" max="1000">
 								</div>
 							</div>
 							<div class="row">
@@ -165,7 +164,7 @@
 									<label for="azimuth__friend">Azimuth:</label>
 								</div>
 								<div class="col s10">
-									<input type="number" id="azimuth__friend" class="input" min="0" max="359">
+									<input tabindex="2" type="number" id="azimuth__friend" class="input" min="0" max="359">
 								</div>
 							</div>
 						</div>

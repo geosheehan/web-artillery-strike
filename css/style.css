@@ -25,6 +25,11 @@
    --background: #dbd9d8;
 }
 
+.btn-flat:focus {
+   outline: 2px solid var(--selected);
+   outline-offset: 2px;
+}
+
 html {
    font-size: 62.5%;
 }

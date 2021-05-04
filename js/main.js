@@ -108,6 +108,9 @@ function init() {
    const rangeWarning = document.getElementById('range');
    rangeWarning.addEventListener('click', toggleRangeWarning);
 
+   // const restrictTabs = document.getElementById('restrictTabs');
+   // restrictTabs.addEventListener('click', toggleTabs);
+
    const timer = document.getElementById('timer');
    timer.addEventListener('click', toggleTimer);
 
@@ -251,6 +254,16 @@ function toggleIncrements() {
 
 function toggleRangeWarning() {
    displayResults();
+}
+
+function toggleTabs() {
+   let restrict = this.checked;
+   if (restrict) {
+      // Only 4 main inputs
+   }
+   else {
+
+   }
 }
 
 /* Call backs stored in HTML */
