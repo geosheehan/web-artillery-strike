@@ -299,7 +299,9 @@ function relocate() {
 
    for (const key in LOCATION_DATA) {
       if (!LOCATION_DATA[key].default) {
-         LOCATION_DATA[key] = calcVector(newLocation, LOCATION_DATA[key]);
+         const newResult = calcVector(newLocation, LOCATION_DATA[key]);
+         newResult.default = false;
+         LOCATION_DATA[key] = newResult;
          const button = document.querySelector(`input[name="${key}"]`);
          if (Array.from(button.classList).includes('selected')) {
             button.click();
