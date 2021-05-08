@@ -72,6 +72,10 @@ input[type="text"] {
    font-size: 1.4rem !important;
 }
 
+input[type="number"] {
+   padding-left: 5px !important;
+}
+
 select {
    display: inline;
    color: white;
