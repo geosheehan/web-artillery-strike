@@ -248,7 +248,7 @@ function updateMode() {
 }
 
 function toggleIncrements() {
-   const incrementText = document.querySelector('#result small');
+   const incrementText = document.querySelector('#result .increment');
    this.checked ? incrementText.classList.remove('hide') : incrementText.classList.add('hide');
 }
 
@@ -385,20 +385,17 @@ function displayResults() {
    const distance = document.getElementById('distance__result');
    const azimuth = document.getElementById('azimuth__result');
    const rangeWarning = document.getElementById('range');
-   const incrementText = distance.querySelector('small');
+   const increment = document.querySelector('#result .increment');
 
-   incrementText.innerText = nearestIncrement(result.distance, min, max, incr);
-
-   distance.innerHTML = `
-      ${result.distance.toFixed(1)} <small class="${Array.from(incrementText.classList).join(' ')}">${incrementText.innerText}</small>
-   `;
+   distance.innerText = result.distance.toFixed(1);
    azimuth.innerText = result.azimuth.toFixed(1);
+   increment.innerText = nearestIncrement(result.distance, min, max, incr);
 
    if (rangeWarning.checked && (result.distance < min || max < result.distance)) {
-      [distance, azimuth].forEach(h1 => h1.classList.add('warning'));
+      [distance, azimuth, increment].forEach(h1 => h1.classList.add('warning'));
    }
    else {
-      [distance, azimuth].forEach(h1 => h1.classList.remove('warning'));
+      [distance, azimuth, increment].forEach(h1 => h1.classList.remove('warning'));
    }
 
 }

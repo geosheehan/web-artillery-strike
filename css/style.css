@@ -149,6 +149,10 @@ select {
    font-weight: 500 !important;
 }
 
+.increment {
+   font-size: 4rem;
+}
+
 #target {
    order: -1;
 }
@@ -165,7 +169,6 @@ select {
 #result h1 {
    font-size: 6rem;
    margin: 0.5rem;
-   padding-left: 5rem;
    max-height: 6.6rem;
 }
 
@@ -181,18 +184,19 @@ select {
    .btn-list {
       grid-template-columns: repeat(2, minmax(0, 1fr));
    }
-}
-
-@media screen and (max-width: 600px) {
-
-   .btn-list > input:nth-last-child(-n + 4) {
-      display: none;
-   }
 
    .display {
       display: flex;
       flex-flow: column nowrap;
       padding: 2rem 0;
+   }
+
+   .row {
+      margin-bottom: 0.5rem !important;
+   }
+
+   .card {
+      max-height: 30vh !important;
    }
 
    #target {
@@ -202,8 +206,12 @@ select {
    #utils {
       grid-column-start: unset;
    }
+}
 
-   #result h1 {
-      padding-left: 0;
+@media screen and (max-width: 600px) {
+
+   .btn-list > input:nth-last-child(-n + 4) {
+      display: none;
    }
+
 }
