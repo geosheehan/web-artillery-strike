@@ -335,6 +335,18 @@ function getThemes() {
    return Array.from(themes).map(theme => theme.value);
 }
 
+function getWind() {
+   let force = document.getElementById('distance__wind').value;
+   let direction = document.getElementById('azimuth__wind').value;
+
+   force = parseFloat(force);
+   direction = parseFloat(direction);
+
+   const wind = new Location(force, direction);
+   wind.default = false;
+   return wind;
+}
+
 function getSelectedButtons() {
    const thing = ['friend', 'target'].map((id) => {
       return document.querySelector(`#${id} .btn-flat.selected`);
@@ -369,9 +381,22 @@ function getMode() {
 }
 
 function updateResults() {
-   let [friend, target] = getSelectedLocations();
+   const useWind = document.getElementById('wind');
 
-   LOCATION_DATA.results = calcVector(friend, target);
+   let [friend, target] = getSelectedLocations();
+   let results = calcVector(friend, target);
+
+   if (false) {
+      let wind = getWind();
+
+      wind.azimuth = (wind.azimuth + 180) % 360;
+      results.azimuth = (results.azimuth + 180) % 360;
+
+      const debug = calcVector(results, wind);
+      console.log({ results, debug });
+   }
+
+   LOCATION_DATA.results = results;
 
    displayResults();
 
