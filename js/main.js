@@ -202,6 +202,11 @@ function toggleTimer() {
 }
 
 function toggleWind() {
+   const wind = document.getElementById('wind');
+
+   (this.checked)
+      ? wind.classList.remove('hide')
+      : wind.classList.add('hide');
    updateResults();
 }
 
