@@ -10,6 +10,9 @@ It is a calculator to help artillery teams determine the **distance** and **azim
 ## Features:
 
 <dl>
+   <dt><span style="color:red">(New)</span> Wind Compensation</dt>
+   <dd>Offset your results with respect to the wind.</dd>
+
    <dt>Instant Results</dt>
    <dd>Get your coordinates now!! Results update every time a change is made or a location is loaded.</dd>
 
