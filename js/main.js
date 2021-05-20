@@ -93,29 +93,22 @@ function init() {
 
    }
 
-   const confirms = document.querySelectorAll('.confirm');
-   initConfirmationButtons(confirms);
+   initInputList(document.querySelectorAll(`#wind input`));
 
-   const themeSelect = document.getElementById('theme');
-   initColorSchemes(themeSelect);
 
-   const modeSelect = document.getElementById('mode');
-   initArtilleryMode(modeSelect);
+   initConfirmationButtons(document.querySelectorAll('.confirm'));
+   initColorSchemes(document.getElementById('theme'));
+   initArtilleryMode(document.getElementById('mode'));
 
-   const increments = document.getElementById('increments');
-   increments.addEventListener('click', toggleIncrements);
-
-   const rangeWarning = document.getElementById('range');
-   rangeWarning.addEventListener('click', toggleRangeWarning);
+   document.getElementById('increments').addEventListener('click', toggleIncrements);
+   document.getElementById('range').addEventListener('click', toggleRangeWarning);
+   document.getElementById('timer').addEventListener('click', toggleTimer);
+   document.getElementById('checkWind').addEventListener('click', toggleWind);
+   document.querySelector('.hamburger').addEventListener('click', () => SIDENAV.open());
 
    // const restrictTabs = document.getElementById('restrictTabs');
    // restrictTabs.addEventListener('click', toggleTabs);
 
-   const timer = document.getElementById('timer');
-   timer.addEventListener('click', toggleTimer);
-
-   const hamburger = document.querySelector('.hamburger');
-   hamburger.addEventListener('click', () => SIDENAV.open());
 }
 
 function initButtonList(btn_list) {
@@ -206,6 +199,10 @@ function toggleTimer() {
       clock.classList.remove('selected');
       clock.value = '10:00';
    }
+}
+
+function toggleWind() {
+   updateResults();
 }
 
 function tick(clock) {
@@ -381,19 +378,18 @@ function getMode() {
 }
 
 function updateResults() {
-   const useWind = document.getElementById('wind');
+   const useWind = document.getElementById('checkWind');
 
    let [friend, target] = getSelectedLocations();
    let results = calcVector(friend, target);
 
-   if (false) {
+   if (useWind.checked) {
       let wind = getWind();
 
       wind.azimuth = (wind.azimuth + 180) % 360;
       results.azimuth = (results.azimuth + 180) % 360;
 
-      const debug = calcVector(results, wind);
-      console.log({ results, debug });
+      results = calcVector(results, wind);
    }
 
    LOCATION_DATA.results = results;
