@@ -1,17 +1,16 @@
 <template>
 	<div id="app">
 		<img alt="Vue logo" src="./assets/logo.png" />
-		<button-group :numButtons="6" />
+		<location-button name="Hello" @click="console.log('clicked')" />
 	</div>
 </template>
 
 <script>
-import ButtonGroup from './components/buttonGroup/ButtonGroup';
-
+import LocationButton from './components/locationButton/LocationButton.vue';
 export default {
 	name: 'App',
 	components: {
-		ButtonGroup,
+		LocationButton,
 	},
 };
 </script>
