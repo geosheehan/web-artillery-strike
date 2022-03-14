@@ -1,7 +1,8 @@
 <template>
 	<div id="app">
 		<img alt="Vue logo" src="./assets/logo.png" />
-		<button-group :selected="1" />
+		<button-group />
+		<button-group />
 	</div>
 </template>
 
@@ -12,11 +13,7 @@ export default {
 	components: {
 		ButtonGroup,
 	},
-	methods: {
-		onLocation(buttonId) {
-			console.log(`clicked button: '${buttonId}'`);
-		},
-	},
+	methods: {},
 };
 </script>
 

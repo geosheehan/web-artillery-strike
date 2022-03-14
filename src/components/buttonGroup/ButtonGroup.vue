@@ -35,7 +35,6 @@ export default {
 	},
 	methods: {
 		selectLocation(locationId) {
-			console.log(`Location ${locationId} clicked`);
 			this.currentSelected = locationId;
 		},
 	},
