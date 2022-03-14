@@ -1,16 +1,21 @@
 <template>
 	<div id="app">
 		<img alt="Vue logo" src="./assets/logo.png" />
-		<location-button name="Hello" @click="console.log('clicked')" />
+		<button-group :selected="1" />
 	</div>
 </template>
 
 <script>
-import LocationButton from './components/locationButton/LocationButton.vue';
+import ButtonGroup from './components/buttonGroup/ButtonGroup.vue';
 export default {
 	name: 'App',
 	components: {
-		LocationButton,
+		ButtonGroup,
+	},
+	methods: {
+		onLocation(buttonId) {
+			console.log(`clicked button: '${buttonId}'`);
+		},
 	},
 };
 </script>
