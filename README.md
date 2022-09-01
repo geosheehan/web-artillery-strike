@@ -10,7 +10,10 @@ It is a calculator to help artillery teams determine the **distance** and **azim
 ## Features:
 
 <dl>
-   <dt><span style="color:red">(New)</span> Wind Compensation</dt>
+   <dt><span style="color:red">(New)</span>Copy to Clipboard</dt>
+   <dd>Copy buttons added for the result vector and the nearest increment to make communicating with in-game chat quicker</dd>
+
+   <dt><span style="color:red">(New)</span>Wind Compensation</dt>
    <dd>Offset your results with respect to the wind.</dd>
 
    <dt>Instant Results</dt>
@@ -38,8 +41,6 @@ It is a calculator to help artillery teams determine the **distance** and **azim
 ## How It's Made:
 
 **Tech used:** HTML, CSS, JavaScript
-
-
 
 <!-- ## Optimizations
 *(optional)*
